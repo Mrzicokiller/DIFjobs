@@ -6,6 +6,7 @@
  * Time: 12:41
  */
 
+header("location: pages/home.php");
 ?>
 
 
