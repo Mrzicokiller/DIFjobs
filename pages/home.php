@@ -5,14 +5,12 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row">
+<div class="container-fluid pl-0 pr-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <?php
             include('../template/nav.php');
             ?>
         </nav>
-    </div>
 </div>
 <!-- Bootstrap core JavaScript
      ================================================== -->

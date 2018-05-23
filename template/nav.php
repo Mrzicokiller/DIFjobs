@@ -7,13 +7,12 @@
  */
 ?>
 
-<button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse"
-        data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-        aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
-    <div class="col-xs-9 text-left">
-
+    <div class="col-sm-9 text-left">
+        <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse"
+                data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <ul class="navbar-nav">
             <li class="navbar-brand">
                 <a class="navbar-brand" href="#">Briefjesboord</a>
@@ -26,8 +25,8 @@
             </li>
         </ul>
     </div>
-    <div class="col-xs-3 text-right">
-        <ul class="navbar-nav">
+    <div class="col-sm-3">
+        <ul class="navbar-nav ">
 
             <li class="nav-item">
                 <a class="nav-link" href="#">Login</a>
