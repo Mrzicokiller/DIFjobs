@@ -12,13 +12,12 @@
         aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
+    <div class="col-xs-9 text-left">
 
-<div class="container">
-    <div class="col-xs-2 left">
-        <a class="navbar-brand" href="#">Briefjesboord</a>
-    </div>
-    <div class="col-xs-7 left">
         <ul class="navbar-nav">
+            <li class="navbar-brand">
+                <a class="navbar-brand" href="#">Briefjesboord</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
             </li>
@@ -27,7 +26,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-xs-3 ml-0 pl-0 right">
+    <div class="col-xs-3 text-right">
         <ul class="navbar-nav">
 
             <li class="nav-item">
@@ -38,5 +37,3 @@
             </li>
         </ul>
     </div>
-</div>
-
