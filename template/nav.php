@@ -14,7 +14,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav">
-            <li class="navbar-brand">
+            <li class="nav-item">
                 <a class="navbar-brand" href="#">Briefjesboord</a>
             </li>
             <li class="nav-item">
