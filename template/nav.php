@@ -26,8 +26,7 @@
         </ul>
     </div>
     <div class="col-sm-3">
-        <ul class="navbar-nav ">
-
+        <ul class="navbar-nav" id="login-buttons">
             <li class="nav-item">
                 <a class="nav-link" href="#">Login</a>
             </li>

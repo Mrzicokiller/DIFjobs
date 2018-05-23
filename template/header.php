@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
     <!-- Custom styles for this template -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/home_style.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript
 ================================================== -->
