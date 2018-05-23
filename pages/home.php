@@ -1,3 +1,4 @@
+<html>
 <head>
     <?php
     include('../template/header.php');
