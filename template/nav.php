@@ -30,7 +30,7 @@
     <div class="col-sm-3">
         <ul class="navbar-nav" id="login-buttons">
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="#" ID="loginBtn">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Registreren</a>
@@ -38,3 +38,7 @@
         </ul>
     </div>
 </div>
+
+<?php
+include("login.php");
+?>
