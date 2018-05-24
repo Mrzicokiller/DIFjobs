@@ -17,13 +17,13 @@
     <div class="col-sm-9 text-left">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="../pages/home.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Vacatures</a>
+                <a class="nav-link" href="../pages/jobs.php">Vacatures</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
+                <a class="nav-link" href="../pages/account.php">Account</a>
             </li>
         </ul>
     </div>
@@ -33,7 +33,7 @@
                 <a class="nav-link" href="#" ID="loginBtn">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Registreren</a>
+                <a class="nav-link" href="../pages/signup.php">Registreren</a>
             </li>
         </ul>
     </div>
