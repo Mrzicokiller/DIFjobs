@@ -22,23 +22,28 @@
         <div class="col-sm-6">
             <form name="signupForm" id="signUpForm" action="../POST/signup.php" method="post">
                 <div class="form-group">
+                    <label for="naam">Naam</label>
+                    <input type="text" name="naam" class="form-control" id="naam" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Voorbeeld@info.nl" required>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Voorbeeld@info.nl" required>
                 </div>
 
                 <div class="form-group">
                     <label for="signUpPassword">Wachtwoord</label>
-                    <input type="password" class="form-control" id="signUpPassword" placeholder="Wachtwoord" required>
+                    <input type="password" name="password" class="form-control" id="signUpPassword" placeholder="Wachtwoord" required>
                 </div>
 
                 <div class="form-group">
                     <label for="signUpconfirmPassword">Herhaal Wachtwoord</label>
-                    <input type="password" class="form-control" id="signUpconfirmPassword" placeholder="Wachtwoord" required>
+                    <input type="password" name="confirmPassword" class="form-control" id="signUpconfirmPassword" placeholder="Wachtwoord" required>
                     <small id="passwordError" class="redLetters">Het wachtwoord is niet hetzelfde.</small>
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="avgCheck" required>
+                    <input type="checkbox" class="form-check-input" name="avgCheck" id="avgCheck" required>
                     <label class="form-check-label" for="avgCheck">Accepteerd u dat wij uw gegevens mogen opslaan.(Deze zullen wij niet delen met een derde.)</label>
 
                 </div>

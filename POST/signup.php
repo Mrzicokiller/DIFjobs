@@ -8,12 +8,13 @@
 
 include_once('../config.php');
 
-
+$naam = $_POST['naam'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $confPassword = $_POST['confirmPassword'];
 $avgCheck = $_POST['avgCheck'];
 
+$naam = mysqli_real_escape_string($mysqli, $naam);
 $email = mysqli_real_escape_string($mysqli, $email);
 $password = mysqli_real_escape_string($mysqli, $password);
 $confPassword = mysqli_real_escape_string($mysqli, $confPassword);
@@ -24,9 +25,24 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 else
 {
     $password = password_hash($password, PASSWORD_BCRYPT);
-    echo $avgCheck."<br/>";
 
-   // $mysqli->query("INSERT INTO `Gebruiker`");
+    if($avgCheck == "on")
+    {
+        $avgCheck = true;
+    }
+    else
+    {
+        $avgCheck = false;
+    }
+
+    if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", false)'))
+    {
+        echo "oke";
+    }
+    else
+    {
+        print_r($mysqli->error);
+    }
 }
 ?>
 <html>
