@@ -20,20 +20,21 @@
         </nav>
     <div class="row mx-auto">
         <div class="col-sm-6">
-            <form name="signupForm" action="../POST/signup.php" method="post">
+            <form name="signupForm" id="signUpForm" action="../POST/signup.php" method="post">
                 <div class="form-group">
-                    <label for="email">Email Addres</label>
+                    <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Voorbeeld@info.nl" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Wachtwoord</label>
-                    <input type="password" class="form-control" id="password" placeholder="Wachtwoord" required>
+                    <label for="signUpPassword">Wachtwoord</label>
+                    <input type="password" class="form-control" id="signUpPassword" placeholder="Wachtwoord" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPassword">Herhaal Wachtwoord</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Wachtwoord" required>
+                    <label for="signUpconfirmPassword">Herhaal Wachtwoord</label>
+                    <input type="password" class="form-control" id="signUpconfirmPassword" placeholder="Wachtwoord" required>
+                    <small id="passwordError" class="redLetters">Het wachtwoord is niet hetzelfde.</small>
                 </div>
 
                 <div class="form-check">
@@ -41,11 +42,27 @@
                     <label class="form-check-label" for="avgCheck">Accepteerd u dat wij uw gegevens mogen opslaan.(Deze zullen wij niet delen met een derde.)</label>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Registreren</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    //alles uitvoeren als het document geladen is
+    $(document).ready(function(){
+        $("#passwordError").hide();
+    });
+
+    //wachtwoord vergelijken
+    $("#signUpForm").submit(function(e)
+    {
+        if($("#signUpPassword").val() !== $("#signUpconfirmPassword").val())
+        {
+            e.preventDefault();
+            $("#passwordError").show();
+        }
+    });
+</script>
 </body>
 <footer>
     <?php

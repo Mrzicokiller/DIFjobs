@@ -12,6 +12,7 @@
             include('../template/nav.php');
             ?>
         </nav>
+
 </div>
 </body>
 <?php
