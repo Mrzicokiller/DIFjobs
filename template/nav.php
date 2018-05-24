@@ -7,21 +7,23 @@
  */
 ?>
 
+<a class="navbar-brand" href="#">Briefjesboord</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse"
+        data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="col-sm-9 text-left">
-        <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse"
-                data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="navbar-brand" href="#">Briefjesboord</a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Vacatures</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Account</a>
             </li>
         </ul>
     </div>
@@ -35,3 +37,4 @@
             </li>
         </ul>
     </div>
+</div>
