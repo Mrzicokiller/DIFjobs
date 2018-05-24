@@ -1,3 +1,13 @@
-#login-buttons{
-    float: right;
+.navigation-link{
+    color: #4e555b;
+    font-size: large;
+}
+.navigation-link:hover{
+    color: #6c757d;
+    font-size: large;
+}
+
+.navigation-brand{
+    color: #ffffff;
+    font-size: x-large;
 }
