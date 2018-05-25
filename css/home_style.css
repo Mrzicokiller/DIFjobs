@@ -1,3 +1,11 @@
+body, h1, h2{
+    color: #1b1e21;
+}
+
+body, p{
+    color: #5a6268;
+}
+
 .navigation-link{
     color: #4e555b;
     font-size: large;
@@ -9,5 +17,55 @@
 
 .navigation-brand{
     color: #ffffff;
-    font-size: x-large;
+    font-size: 30px;
+}
+
+.navigation-brand:hover{
+    color: #6c757d;
+    font-size: 30px;
+}
+
+i, span {
+    display: inline-block;
+}
+
+.pull-right{
+    float: right;
+}
+
+.pull-left{
+    float: left;
+}
+
+.huge {
+    font-size: 50px;
+}
+.card-green {
+    border-color: #5cb85c;
+}
+.card-green > .card-heading {
+    border-color: #5cb85c;
+    color: white;
+    background-color: #5cb85c;
+}
+.card-green > a {
+    color: #5cb85c;
+}
+.card-green > a:hover {
+    color: #3d8b3d;
+}
+
+.card-red {
+    border-color: #cc4545;
+}
+.card-red > .card-heading {
+    border-color: #cc4545;
+    color: white;
+    background-color: #cc4545;
+}
+.card-red > a {
+    color: #cc4545;
+}
+.card-red > a:hover {
+    color: #cc4545;
 }

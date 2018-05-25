@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="../vendors/bootstrap/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="../vendors/bootstrap/css/bootstrap-reboot.min.css">
 
+    <!-- Fontawesome icons -->
+    <link rel="stylesheet" href="../vendors/fontawesome/css/fontawesome-all.min.css">
+
     <!-- Custom styles -->
     <link href="../css/home_style.css" rel="stylesheet">
 
