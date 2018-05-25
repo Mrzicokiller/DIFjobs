@@ -29,6 +29,7 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Voorbeeld@info.nl" required>
+                    <small id="emailexisterror" class="redLetters">Dit email adres is al geregistreerd. Vul een ander email adres in of vraag je wachtwoord aan.</small>
                 </div>
 
                 <div class="form-group">
@@ -56,16 +57,33 @@
     //alles uitvoeren als het document geladen is
     $(document).ready(function(){
         $("#passwordError").hide();
+        $("#emailexisterror").hide();
     });
 
-    //wachtwoord vergelijken
+    //input velden checken
     $("#signUpForm").submit(function(e)
     {
+        e.preventDefault();
+        //bestaat de email al
+        $.post("../POST/signup_email_check.php",{
+            email: $("#email").val()
+        },
+        function(result)
+        {
+            if(result == 1)
+            {
+                e.preventDefault();
+                $("#emailexisterror").show();
+            }
+        });
+
+        //wachtwoorden vergelijken
         if($("#signUpPassword").val() !== $("#signUpconfirmPassword").val())
         {
             e.preventDefault();
             $("#passwordError").show();
         }
+
     });
 </script>
 </body>
