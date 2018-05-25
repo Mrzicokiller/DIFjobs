@@ -6,23 +6,14 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Briefjesboord</a>
-        <div class="col-lg-">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link " href="#">company</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Jobs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
-            </ul>
-        </div>
-
-        <div class="col-xs-3 text-right">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link">login</a></li>
-            </ul>
-        </div>
-</nav>
+<div class="container-fluid pl-0 pr-0">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <?php
+            include('../template/nav.php');
+            ?>
+        </nav>
+</div>
+</body>
 <?php
 include('../template/footer.php');
 ?>
