@@ -13,9 +13,9 @@
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL))
     {
-        $naam = $mysqli->query("SELECT Naam FROM gebruiker WHERE Email = '" .$email . "'");
+        $result = $mysqli->query("SELECT ID FROM gebruiker WHERE Email = '" .$email . "'");
 
-        if($naam != NULL)
+        if($result->num_rows > 0)
         {
             echo 1;
         }
@@ -23,5 +23,8 @@
         {
             echo 0;
         }
+
+        $mysqli->close();
+
     }
 ?>

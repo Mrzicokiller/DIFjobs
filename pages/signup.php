@@ -48,12 +48,16 @@
                     <label class="form-check-label" for="avgCheck">Accepteerd u dat wij uw gegevens mogen opslaan.(Deze zullen wij niet delen met een derde.)</label>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Registreren</button>
+                <button onclick="submitForm()" type="button" class="btn btn-primary">Registreren</button>
             </form>
         </div>
     </div>
 </div>
 <script>
+    //variables
+    var checkEmailDone = false;
+    var checkPasswordDone = false;
+
     //alles uitvoeren als het document geladen is
     $(document).ready(function(){
         $("#passwordError").hide();
@@ -61,30 +65,52 @@
     });
 
     //input velden checken
-    $("#signUpForm").submit(function(e)
+    function submitForm()
     {
-        e.preventDefault();
-        //bestaat de email al
-        $.post("../POST/signup_email_check.php",{
-            email: $("#email").val()
-        },
-        function(result)
-        {
-            if(result == 1)
-            {
-                e.preventDefault();
-                $("#emailexisterror").show();
-            }
-        });
 
-        //wachtwoorden vergelijken
-        if($("#signUpPassword").val() !== $("#signUpconfirmPassword").val())
+        $("#passwordError").hide();
+        $("#emailexisterror").hide();
+
+
+        if(checkEmailDone !== true || checkPasswordDone !== true)
         {
-            e.preventDefault();
-            $("#passwordError").show();
+            //bestaat de email al
+            $.post("../POST/email_check.php", {
+                    email: $("#email").val()
+                },
+                function (result)
+                {
+                    if (result == 1) {
+                        $("#emailexisterror").show();
+                        checkEmailDone = false;
+                    }
+                    else {
+                        checkEmailDone = true;
+                    }
+
+                });
+
+
+            //wachtwoorden vergelijken
+            if ($("#signUpPassword").val() !== $("#signUpconfirmPassword").val())
+            {
+                $("#passwordError").show();
+                checkPasswordDone = false;
+            }
+            else
+            {
+                checkPasswordDone = true;
+            }
+
         }
 
-    });
+        if(checkEmailDone === true && checkPasswordDone === true)
+        {
+            $("#signUpForm").submit();
+        }
+
+
+    }
 </script>
 </body>
 <footer>
