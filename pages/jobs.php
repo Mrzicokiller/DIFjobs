@@ -48,7 +48,7 @@
     </div>
 
     <div class="row mt-lg-4 ml-sm-2 mr-sm-2">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card card-green">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card card-green">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card card-green">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
@@ -119,7 +119,7 @@
     </div>
 
     <div class="row mt-lg-4 ml-sm-2 mr-sm-2">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card card-red">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card card-red">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card card-red">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
