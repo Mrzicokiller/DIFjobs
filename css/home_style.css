@@ -69,3 +69,18 @@ i, span {
 .card-red > a:hover {
     color: #cc4545;
 }
+
+.card-grey {
+    border-color: grey;
+}
+.card-grey > .card-heading {
+    border-color: grey;
+    color: white;
+    background-color: grey;
+}
+.card-grey > a {
+    color: darkgray;
+}
+.card-grey > a:hover {
+    color: grey;
+}
