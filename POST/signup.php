@@ -37,11 +37,11 @@ else
 
     if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", false)'))
     {
-        echo "oke";
     }
     else
     {
         print_r($mysqli->error);
+        echo "Neem contact op met de beheerder";
     }
 }
 ?>
