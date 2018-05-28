@@ -69,3 +69,7 @@ i, span {
 .card-red > a:hover {
     color: #cc4545;
 }
+
+.redLetters{
+    color: red;
+}
