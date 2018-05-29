@@ -10,14 +10,14 @@
 				<form role="loginform" method="POST" action="../POST/login.php">
 					<div class="form-group">
 						<label for="usrname"><span class="glyphicon glyphicon-user"></span> Email</label>
-						<input type="text" class="form-control" id="email" name="email" placeholder="voer email in">
-						<small id="emailError" class="redLetters" hidden="true">Het emailadres is niet ingevuld</small>
+						<input type="text" class="form-control" id="loginEmail" name="loginEmail" placeholder="voer email in">
+						<small id="loginEmailError" class="redLetters" hidden="true">Het emailadres is niet ingevuld</small>
 					</div>
 					<div class="form-group">
 						<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Wachtwoord</label>
-						<input type="password" class="form-control" id="wachtwoord" name="wachtwoord"
-							   placeholder="voer wachtwoord in">
-						<small id="passwordError" class="redLetters" hidden="true">Het wachtwoord is niet ingevuld</small>
+						<input type="password" class="form-control" id="loginWachtwoord" name="loginWachtwoord"
+							   placeholder="voer wachtwoord in" autocomplete="off">
+						<small id="loginPasswordError" class="redLetters" hidden="true">Het wachtwoord is niet ingevuld</small>
 					</div>
 					<button type="submit" class="btn btn-default btn-block buttoncolorgray"><span
 								class="glyphicon glyphicon-off"></span> Login
@@ -35,22 +35,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-    //wordt uitgevoerd wanneer form gesubmit wordt
-    $("#loginform").submit(function (e) {
-        //checkt of email leeg is
-		debugger;
-        if ($("#email").val() == null) {
-            //stopt met submitten
-            e.preventDefault();
-            //laat error zien dat er geen mail is ingevoerd
-            $("#emailError").show();
-        } else if ($("#password").val() == null){
-        	e.preventDefault();
-        	//laat error zien dat er geen mail is ingevoerd
-        	$("#passwordError").show();
-    	}
-    });
-</script>
-
