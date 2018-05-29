@@ -8,7 +8,8 @@
 
 include_once('../config.php');
 
-$naam = $_POST['naam'];
+
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 $confPassword = $_POST['confirmPassword'];

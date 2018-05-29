@@ -73,3 +73,9 @@ i, span {
 .redLetters{
     color: red;
 }
+
+.buttoncolorgray{
+    background-color: #47556d;
+    border-color: #47556d;
+    color: #f7f9fc;
+}
