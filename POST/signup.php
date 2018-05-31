@@ -37,7 +37,7 @@ $message =
         </head>
         <body>
             <p>Druk op de onderstaande link om je email de te rifiëren.</p><br/>
-            <a href="localhost/confirmEmail?code=' . $verifiedCode . '">Email verifiëren</a>       
+            <a href="localhost/confirmEmail?email=' . $email . '&code=' . $verifiedCode . '">Email verifiëren</a>       
         </body>
      </html>
     ';
@@ -68,7 +68,7 @@ else
     {
         $status = "gelukt";
 
-        mail($email, $subject, $message, $headers);
+        //mail($email, $subject, $message, $headers);
 
     }
     else
@@ -93,6 +93,7 @@ else
             </nav>
 
             <h1><?php echo $status ?></h1>
+            <h1><?php echo $verifiedCode ?></h1>
 
             <?php
                 if($status == "gelukt")

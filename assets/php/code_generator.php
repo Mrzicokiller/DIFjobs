@@ -14,7 +14,7 @@ function code_generator($length)
     $code = '';
     //een for loop die random karakters uit de characters string haalt en in code zet
     for ($i = 0; $i < $length; $i++) {
-        $code = $characters[rand(0, strlen($characters))];
+        $code .= $characters[rand(0, strlen($characters))];
     }
     return $code;
 }
