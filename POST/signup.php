@@ -9,7 +9,7 @@
 include_once('../config.php');
 
 
-
+$naam = $_POST['naam'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $confPassword = $_POST['confirmPassword'];
@@ -36,7 +36,7 @@ else
         $avgCheck = false;
     }
 
-    if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", false)'))
+    if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", NULL  , false ,false)'))
     {
     }
     else
