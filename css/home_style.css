@@ -70,6 +70,21 @@ i, span {
     color: #cc4545;
 }
 
+.card-grey {
+    border-color: grey;
+}
+.card-grey > .card-heading {
+    border-color: grey;
+    color: white;
+    background-color: grey;
+}
+.card-grey > a {
+    color: darkgray;
+}
+.card-grey > a:hover {
+    color: grey;
+}
+=======
 .redLetters{
     color: red;
 }
@@ -79,3 +94,4 @@ i, span {
     border-color: #47556d;
     color: #f7f9fc;
 }
+

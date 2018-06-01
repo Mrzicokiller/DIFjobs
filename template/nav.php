@@ -20,7 +20,9 @@
             <li class="nav-item">
                 <a class="nav-link navigation-link" href="../pages/jobs.php">Vacatures</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link navigation-link" href="../pages/account.php">Account</a>
+            </li>
 
         </ul>
 
