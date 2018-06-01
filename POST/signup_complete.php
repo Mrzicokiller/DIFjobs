@@ -15,8 +15,16 @@ if(isset($_POST['studentSubmit']))
     $gebruikersID = $_POST['gebruikerID'];
     $specialisatie = $_POST['specialisatie'];
 
-    $mysqli->query('INSERT INTO student VALUES(' . $gebruikersID . ', "' . $specialisatie .'")');
-    $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
+    if($mysqli->query('INSERT INTO student VALUES(' . $gebruikersID . ', "' . $specialisatie .'")'))
+    {
+        $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
+    }
+    else
+    {
+        $status = "vraag een beheerder";
+        print_r($mysqli->error);
+    }
+
 }
 elseif(isset($_POST['bedrijfSubmit']))
 {
@@ -25,16 +33,31 @@ elseif(isset($_POST['bedrijfSubmit']))
     $bedrijfURL = $_POST['bedrijfURL'];
     $bedrijfTel = $_POST['bedrijfTel'];
 
-    $mysqli->query('INSERT INTO bedrijf VALUES(' . $gebruikersID . '"' . $bedrijfNaam . '", "' . $bedrijfURL . '", "' . $bedrijfTel . '")');
-    $status = "Je bent geregistreerd als bedrijf. Wil je later ook een student of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
+    if($mysqli->query('INSERT INTO bedrijf VALUES(' . $gebruikersID . ',"' . $bedrijfNaam . '", "' . $bedrijfURL . '", "' . $bedrijfTel . '")'))
+    {
+        $status = "Je bent geregistreerd als bedrijf. Wil je later ook een student of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
+    }
+    else
+    {
+        $status = "vraag een beheerder";
+        print_r($mysqli->error);
+    }
+
 }
 elseif(isset($_POST['particulierSubmit']))
 {
     $gebruikersID = $_POST['gebruikerID'];
     $particulierTel = $_POST['particulierTel'];
 
-    $mysqli->query('INSERT INTO particulier VALUES(' . $gebruikersID . ', "' . $particulierTel .'")');
-    $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of student aan je account toevoegen dan kan dat via de account pagina";
+    if($mysqli->query('INSERT INTO particulier VALUES(' . $gebruikersID . ', "' . $particulierTel .'")'))
+    {
+        $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of student aan je account toevoegen dan kan dat via de account pagina";
+    }
+    else
+    {
+        $status = "vraag een beheerder";
+        print_r($mysqli->error);
+    }
 }
 ?>
 

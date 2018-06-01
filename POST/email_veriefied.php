@@ -18,7 +18,7 @@
     {
         $gebruikerID = $result->fetch_object()->ID;
 
-       // $mysqli->query('UPDATE gebruiker SET veriefied = true, verifiedCode = NULL WHERE ID = ' . $gebruikerID . ' ');
+        $mysqli->query('UPDATE gebruiker SET veriefied = true, verifiedCode = NULL WHERE ID = ' . $gebruikerID . ' ');
 
 
     }
