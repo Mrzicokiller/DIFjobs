@@ -37,7 +37,7 @@ $message =
         </head>
         <body>
             <p>Druk op de onderstaande link om je email de te rifiëren.</p><br/>
-            <a href="localhost/confirmEmail?email=' . $email . '&code=' . $verifiedCode . '">Email verifiëren</a>       
+            <a href="localhost/email_veriefied.php?email=' . $email . '&code=' . $verifiedCode . '">Email verifiëren</a>       
         </body>
      </html>
     ';
