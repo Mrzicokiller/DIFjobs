@@ -68,7 +68,7 @@
                 </div>
                 <div class="card-body" id="studentBody">
                     <h1 class="card-title">Student</h1>
-                    <form name="studentForm" action="" method="post">
+                    <form name="studentForm" action="signup_complete.php" method="post">
                         <label for="specialisatie">Wat is je specialisatie?</label>
                         <input type="text" name="specialisatie" class="form-control" id="specialisatie" placeholder="programmeur" required>
                         <input type="hidden" name="gebruikerID" value="<?php echo $gebruikerID ?>"><br/>
@@ -78,13 +78,13 @@
 
                 <div class="card-body" id="BedrijfBody" hidden>
                     <h1 class="card-title">Bedrijf</h1>
-                    <form name="bedrijfForm" action="" method="post">
+                    <form name="bedrijfForm" action="signup_complete.php" method="post">
                         <label for="bedrijfNaam">Wat is de naam van het Bedrijf?</label>
                         <input type="text" name="bedrijfNaam" class="form-control" id="bedrijfNaam" placeholder="Google" required>
                         <label for="bedijfURL">Wat is de link naar je bedrijfs website?</label>
                         <input type="text" name="bedrijfURL" class="form-control" id="bedijfURL" placeholder="www.Google.nl">
                         <label for="bedrijfTel">Wat is het telefoonnummer waar naar studenten kunnen bellen?</label>
-                        <input type="tel" name="bedrijftTel" class="form-control" id="bedrijfTel" placeholder="06123456789">
+                        <input type="tel" name="bedrijfTel" class="form-control" id="bedrijfTel" placeholder="06123456789">
                         <input type="hidden" name="gebruikerID" value="<?php echo $gebruikerID ?>"><br/>
                         <button type="submit" class="btn btn-primary" name="bedrijfSubmit">Submit</button>
                     </form>
@@ -92,7 +92,7 @@
 
                 <div class="card-body" id="particulierBody" hidden>
                     <h1 class="card-title">Particulier</h1>
-                    <form name="studentForm" action="" method="post">
+                    <form name="particulierForm" action="signup_complete.php" method="post">
                         <label for="particulierTel">Wat is het telefoonnummer waar naar studenten kunnen bellen?</label>
                         <input type="tel" name="particulierTel" class="form-control" id="particulierTel" placeholder="06123456789" required>
                         <input type="hidden" name="gebruikerID" value="<?php echo $gebruikerID ?>"><br/>
