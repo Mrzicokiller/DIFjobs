@@ -28,7 +28,7 @@ $checkEmailExist = mysqli_query($mysqli, $checkEmailExistQuery);
 
 if (mysqli_num_rows($checkEmailExist) > 0) {
     //var met query die het wachtwoord ophaalt
-    $getPasswordQuery = "SELECT wachtwoord FROM gebruiker WHERE email = '$loginemail'";
+    $getPasswordQuery = "SELECT ID, wachtwoord FROM gebruiker WHERE email = '$loginemail'";
 
     //uitkomst van de query
     $getPassword = mysqli_query($mysqli, $getPasswordQuery);
@@ -36,14 +36,14 @@ if (mysqli_num_rows($checkEmailExist) > 0) {
     //while loop die value uit  de row haalt en in var checkPassword zet
     while($rij = mysqli_fetch_array($getPassword)){
         $checkPassword = $rij['wachtwoord'];
+        $ID = $rij['ID'];
     }
 
     if(password_verify($loginwachtwoord, $checkPassword)) {
-        echo "ingelogd";
-        //session_start();
-        //$_SESSION["name"] = loginemail;
-        //$_SESSION["ingelogd"] = true;
-        //echo "You logged in!";
+        session_start();
+        $_SESSION["name"] = $loginemail;
+        $_SESSION["ID"] = $ID;
+        echo "You logged in!";
     } else {
         echo "$checkPassword</br>";
         echo "$loginwachtwoord</br>";
@@ -53,7 +53,6 @@ if (mysqli_num_rows($checkEmailExist) > 0) {
 } else {
     echo "dit emailadres is niet geregistreerd";
 }
-
 
 ?>
 
