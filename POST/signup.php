@@ -11,6 +11,7 @@ include_once('../config.php');
 include_once ('../assets/php/code_generator.php');
 
 //haal alle gegevens uit het formulier
+
 $naam = $_POST['naam'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -64,7 +65,9 @@ else
         $avgCheck = false;
     }
 
+
     if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", "' . $verifiedCode . '", false ,false)'))
+
     {
         $status = "gelukt";
 

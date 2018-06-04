@@ -14,4 +14,3 @@ $db_database = 'projectse4';
 
 // maak de database-verbinding
 $mysqli = mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
-
