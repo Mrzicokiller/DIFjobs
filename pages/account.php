@@ -27,8 +27,6 @@ if (isset($_SESSION['ID'])) {
                               WHERE s.ID = " . $ID);
 
 
-
-
     //maak booleans en check of het een bedrijf is
     $is_bedrijf = false;
     $is_particulier = false;
@@ -46,10 +44,10 @@ if (isset($_SESSION['ID'])) {
         $bedrijfURL;
         $bedrijfTel;
 
-        while ($rij = $bedrijfsgegevens){
+        while ($rij = $bedrijfsgegevens) {
             $bedrijfsnaam = $rij['naamBedrijf'];
             $bedrijfURL = $rij['webstieUrl'];
-            $bedrijfTel= $rij['tel_nummer'];
+            $bedrijfTel = $rij['tel_nummer'];
         }
     }
 
@@ -75,6 +73,8 @@ if (isset($_SESSION['ID'])) {
 
     }
 
+    $mysqli->close();
+
     ?>
     <html>
     <head>
@@ -94,7 +94,11 @@ if (isset($_SESSION['ID'])) {
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 mt-sm-4 ml-sm-2 mr-sm-2">
-                <h1>Account<!--replace with username later--></h1>
+                <h1><?php if (!empty($_SESSION['name'])) {
+                        echo $_SESSION['name'];
+                    } else {
+                        echo "Account";
+                    } ?></h1>
                 <hr/>
             </div>
         </div>
@@ -130,51 +134,74 @@ if (isset($_SESSION['ID'])) {
                         <h1 class="card-title">Gegevens</h1>
 
                         <h3>persoonlijke gegevens:</h3>
-                        <form name="changeName" action="../POST/updateUserData.php" method="post">
-
-                            <div class="form-group">
-                                <label for="naam">Naam:</label>
-                                <input type="text" class="form-control" id="naam" placeholder="John Doe" value="<?php echo $_SESSION['name']; ?>" required>
+                        <form name="changeName">
+                            <div class="row">
+                                <div class="form-group col-lg-2">
+                                    <label for="naam">Naam:</label>
+                                    <input type="text" class="form-control" id="naam" placeholder="John Doe"
+                                           value="<?php echo $_SESSION['name']; ?>" required>
+                                </div>
+                                <div class="col-lg-2 mt-2 pt-sm-4">
+                                    <button onclick="nameSubmit()" class="btn btn-primary">Opslaan</button>
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" value="<?php echo $_SESSION['email']; ?>"
-                                       required>
+                        </form>
+                        <form name="changeEmail">
+                            <div class="row">
+                                <div class="form-group col-lg-2">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email"
+                                           value="<?php echo $_SESSION['email']; ?>"
+                                           required>
+                                </div>
+                                <div class="col-lg-2 mt-2 pt-sm-4">
+                                    <button onclick="emailSubmit()" class="btn btn-primary">Opslaan
+                                    </button>
+                                </div>
                             </div>
-                            <br/>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <small class="redLetters" id="emailError">Dit email adres is al in gebruik.</small>
                         </form>
                         <hr/>
 
                         <h3>wachtwoord veranderen:</h3>
-                        <form name="changePassword" action="../POST/updateUserData.php" method="post">
-
-                            <div class="form-group">
-                                <label for="password">Wachtwoord*</label>
-                                <input type="password" class="form-control" id="password" placeholder="Wachtwoord"
-                                       required>
+                        <form name="changePassword">
+                            <div class="row">
+                                <div class="form-group col-lg-2">
+                                    <label for="password">Nieuw Wachtwoord*</label>
+                                    <input type="password" class="form-control" id="password" placeholder="Wachtwoord"
+                                           required>
+                                </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="confirmPassword">Herhaal Wachtwoord*</label>
-                                <input type="password" class="form-control" id="confirmPassword"
-                                       placeholder="Wachtwoord" required>
+                            <div class="row">
+                                <div class="form-group col-lg-2">
+                                    <label for="confirmPassword">Herhaal Wachtwoord*</label>
+                                    <input type="password" class="form-control" id="confirmPassword"
+                                           placeholder="Wachtwoord" required>
+                                </div>
+                                <div class="col-sm-3 mt-2 pt-sm-4">
+                                    <button onclick="passwordSubmit()" class="btn btn-primary">Opslaan
+                                    </button>
+                                </div>
                             </div>
-                            <br/>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <small id="passwordError" class="redLetters">Het wachtwoord is niet het zelfde.</small>
                         </form>
 
                         <?php if ($is_student) { ?>
                             <!-- forms als gebruiker student is -->
                             <h3>Specialisatie:</h3>
-                            <form name="specialisatie" action="../POST/updateUserData.php?T=student" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="specialisatie" value="<?php echo $specialisatie; ?>"
-                                           placeholder="C# developer">
+                            <form name="specialisatie">
+                                <div class="row">
+                                    <div class="form-group col-lg-2">
+                                        <input type="text" class="form-control" id="specialisatie"
+                                               value="<?php echo $specialisatie; ?>"
+                                               placeholder="C# developer">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button onclick="skillSubmit()" class="btn btn-primary">Opslaan</button>
+                                    </div>
                                 </div>
-                                <br/>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
+
                             </form>
 
                         <?php }
@@ -306,6 +333,71 @@ if (isset($_SESSION['ID'])) {
         </div>
     </div>
     <script>
+        //alles uitvoeren als het document geladen is
+        $(document).ready(function () {
+            $("#passwordError").hide();
+            $("#emailError").hide();
+        });
+
+        //als de sumbit knop van naam veranderen wordt geklikt
+        function nameSubmit() {
+            //update naar database met ajax
+            $.post("../POST/updateUserData.php?type=name", {
+                name: $("#naam").val()
+            });
+        }
+
+        function emailSubmit() {
+
+            //check of het email adres al bestaat
+            $.post("../POST/email_check.php", {
+                    email: $("#email").val()
+                },
+                function (result) {
+                    if (result == 1) {
+                        $("#emailError").show();
+                        console.log("nee");
+                    }
+                    else {
+                        console.log("ja");
+                        console.log($("#email").val());
+                        $.post("../POST/updateUserData.php?type=email", {
+                            email: $("#email").val()
+                        });
+                    }
+                });
+        }
+
+        function passwordSubmit() {
+            //wachtwoorden vergelijken
+            if ($("#password").val() !== $("#confirmPassword").val()) {
+                $("#passwordError").show();
+            }
+            else {
+                $.post("../POST/updateUserData.php?type=password", {
+                        pass: $("#password").val()
+                    },
+                    function (result) {
+                        if (result == 1) {
+                            return true
+                        }
+                        else {
+                            return false;
+
+                        }
+
+                    });
+            }
+
+        }
+
+        function skillSubmit() {
+            //update naar database met ajax
+            $.post("../POST/updateUserData.php?type=skill", {
+                skill: $("#specialisatie").val()
+            });
+        }
+
 
         //detecteer click
         $('#dataTab').click(function () {
