@@ -6,8 +6,11 @@
  * Time: 12:18
  */
 
+//include alle benodigde files
 include_once('../config.php');
+include_once ('../assets/php/code_generator.php');
 
+//haal alle gegevens uit het formulier
 
 $naam = $_POST['naam'];
 $email = $_POST['email'];
@@ -15,10 +18,36 @@ $password = $_POST['password'];
 $confPassword = $_POST['confirmPassword'];
 $avgCheck = $_POST['avgCheck'];
 
+//zorg ervoor dat er geen sql injections of html code in de string staat
 $naam = mysqli_real_escape_string($mysqli, $naam);
 $email = mysqli_real_escape_string($mysqli, $email);
 $password = mysqli_real_escape_string($mysqli, $password);
 $confPassword = mysqli_real_escape_string($mysqli, $confPassword);
+
+//maak een verificatie code aan
+$verifiedCode = code_generator(10);
+
+$status = "";
+
+//variable voor de email
+$subject = "Bevestig uw email";
+$message =
+    '<html>
+        <head>
+            <title>Email bevestigen</title>
+        </head>
+        <body>
+            <p>Druk op de onderstaande link om je email de te rifiëren.</p><br/>
+            <a href="localhost/email_veriefied.php?email=' . $email . '&code=' . $verifiedCode . '">Email verifiëren</a>       
+        </body>
+     </html>
+    ';
+
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+$headers .= 'From: <briefjesboord@test.nl>' . "\r\n";
+
+
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
@@ -36,13 +65,19 @@ else
         $avgCheck = false;
     }
 
-    if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", NULL  , false ,false)'))
+
+    if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", "' . $verifiedCode . '", false ,false)'))
+
     {
+        $status = "gelukt";
+
+        //mail($email, $subject, $message, $headers);
+
     }
     else
     {
         print_r($mysqli->error);
-        echo "Neem contact op met de beheerder";
+        $status = "Neem contact op met de beheerder";
     }
 }
 ?>
@@ -60,7 +95,17 @@ else
                 ?>
             </nav>
 
-            <h1>Gelukt</h1>
+            <h1><?php echo $status ?></h1>
+            <h1><?php echo $verifiedCode ?></h1>
+
+            <?php
+                if($status == "gelukt")
+                {
+                    ?>
+                    <h3>Er is een email gestuurd waar je je email moet bevestiggen.</h3>
+                    <?php
+                }
+            ?>
         </div>
     </body>
 </html>
