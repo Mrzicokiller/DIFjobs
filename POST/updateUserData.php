@@ -73,3 +73,17 @@ elseif ($_GET['type'] == 'skill')
 
     $mysqli->close();
 }
+
+elseif ($_GET['type'] == 'bedrijf')
+{
+    $bedrijfNaam = mysqli_real_escape_string($mysqli, $_POST['name']);
+    $bedrijfUrl = mysqli_real_escape_string($mysqli, $_POST['url']);
+    $bedrijfTel = mysqli_real_escape_string($mysqli, $_POST['tel']);
+
+
+    $bedrijfUpdate = $mysqli->query("UPDATE `bedrijf` SET `naamBedrijf`= '".$bedrijfNaam."',
+                                        `websiteUrl`= '".$bedrijfUrl."',
+                                        `tel_nummer`= '".$bedrijfTel."' WHERE ID = ".$_SESSION['ID']);
+
+    $mysqli->close();
+}

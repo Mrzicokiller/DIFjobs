@@ -40,7 +40,7 @@ if (isset($_SESSION['ID'])) {
         $bedrijfsgegevens = $bedrijfGegevensQuery->fetch_array();
 
 
-        $bedrijfsnaam =  $bedrijfsgegevens['naamBedrijf'];
+        $bedrijfsnaam = $bedrijfsgegevens['naamBedrijf'];
         $bedrijfURL = $bedrijfsgegevens['websiteUrl'];
         $bedrijfTel = $bedrijfsgegevens['tel_nummer'];
     }
@@ -205,27 +205,36 @@ if (isset($_SESSION['ID'])) {
 
                             <!-- form als gebruiker bedrijf is -->
                             <h3>Bedrijfsgegevens:</h3>
-                            <form name="bedrijfsgegevens">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
                                     <label for="Bedrijfsnaam">Bedrijfsnaam:</label>
                                     <input type="text" class="form-control" id="Bedrijfsnaam"
-                                           placeholder="Dif jobs developer">
+                                           placeholder="Dif jobs developer" value="<?php echo $bedrijfsnaam; ?>">
                                 </div>
+                            </div>
 
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
                                     <label for="webURL">Website:</label>
-                                    <input type="url" class="form-control" id="webURL" placeholder="www.difjobs.nl">
+                                    <input type="url" class="form-control" id="webURL"
+                                           value="<?php echo $bedrijfURL; ?>" placeholder="www.difjobs.nl">
                                 </div>
+                            </div>
 
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
                                     <label for="phoneNumber">Telefoonnummer:</label>
-                                    <input type="url" class="form-control" id="phoneNumber" placeholder="0612345678">
+                                    <input type="url" class="form-control" id="phoneNumber"
+                                           value="<?php echo $bedrijfTel; ?>" placeholder="0612345678">
                                 </div>
+                            </div>
 
-                                <br/>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-
+                            <br/>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <button onclick="bedrijfSubmit();" class="btn btn-primary">Opslaan</button>
+                                </div>
+                            </div>
                         <?php }
                         if ($is_particulier) {
                             ?>
@@ -333,23 +342,24 @@ if (isset($_SESSION['ID'])) {
             $("#emailError").hide();
         });
 
-        //als de sumbit knop van naam veranderen wordt geklikt
+        //als de nameSumbit knop van naam veranderen wordt geklikt
         function nameSubmit() {
             //update naar database met ajax
             $.post("../POST/updateUserData.php?type=name", {
                 name: $("#naam").val()
-            },function (result) {
-                if(result)
-                {
+            }, function (result) {
+                if (result) {
+                    //als de update is gelukt
                     alert("yeah");
                 }
-                else
-                {
+                else {
+                    //als de update niet is gelukt
                     alert("aaawh");
                 }
             });
         }
 
+        //als de emailSumbit knop van email veranderen wordt geklikt
         function emailSubmit() {
 
             //check of het email adres al bestaat
@@ -358,12 +368,11 @@ if (isset($_SESSION['ID'])) {
                 },
                 function (result) {
                     if (result == 1) {
+                        //laat emailError verschijnen
                         $("#emailError").show();
-                        console.log("nee");
                     }
                     else {
-                        console.log("ja");
-                        console.log($("#email").val());
+                        //update het email adres
                         $.post("../POST/updateUserData.php?type=email", {
                             email: $("#email").val()
                         });
@@ -371,33 +380,35 @@ if (isset($_SESSION['ID'])) {
                 });
         }
 
+        //als de passwordSumbit knop van wachtwoord veranderen wordt geklikt
         function passwordSubmit() {
             //wachtwoorden vergelijken
             if ($("#password").val() !== $("#confirmPassword").val()) {
                 $("#passwordError").show();
             }
             else {
+                //update wachtwoord met ajax
                 $.post("../POST/updateUserData.php?type=password", {
-                        pass: $("#password").val()
-                    },
-                    function (result) {
-                        if (result == 1) {
-                            return true
-                        }
-                        else {
-                            return false;
-
-                        }
-
-                    });
+                    pass: $("#password").val()
+                });
             }
 
         }
 
+        //als de skillSumbit knop van specialisatie veranderen wordt geklikt
         function skillSubmit() {
-            //update naar database met ajax
+            //update specialisatie naar database met ajax
             $.post("../POST/updateUserData.php?type=skill", {
                 skill: $("#specialisatie").val()
+            });
+        }
+
+        function bedrijfSubmit() {
+            //update specialisatie naar database met ajax
+            $.post("../POST/updateUserData.php?type=bedrijf", {
+                name: $("#Bedrijfsnaam").val(),
+                url: $("#webURL").val(),
+                tel: $("#phoneNumber").val()
             });
         }
 
@@ -421,12 +432,16 @@ if (isset($_SESSION['ID'])) {
         });
 
         $('#jobsTab').click(function () {
+
+            //verander classes
             $('#jobsTab').addClass('active');
             $('#responseTab').removeClass('active');
             $('#dataTab').removeClass('active');
 
+            //laat de body zien van de geklikte tab
             $('#jobsBody').removeAttr('hidden');
 
+            //als 1 van de ander body's nog niet hidden is, maak ze dan hidden
             if (!$('#dataBody').attr('hidden') || !$('#responseBody').attr('hidden')) {
                 $('#responseBody').attr('hidden', true);
                 $('#dataBody').attr('hidden', true);
@@ -434,12 +449,15 @@ if (isset($_SESSION['ID'])) {
         });
 
         $('#responseTab').click(function () {
+            //verander classes
             $('#responseTab').addClass('active');
             $('#jobsTab').removeClass('active');
             $('#dataTab').removeClass('active');
 
+            //laat de body zien van de geklikte tab
             $('#responseBody').removeAttr('hidden');
 
+            //als 1 van de ander body's nog niet hidden is, maak ze dan hidden
             if (!$('#dataBody').attr('hidden') || !$('#jobsBody').attr('hidden')) {
                 $('#jobsBody').attr('hidden', true);
                 $('#dataBody').attr('hidden', true);
