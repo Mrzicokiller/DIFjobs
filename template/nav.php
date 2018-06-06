@@ -5,6 +5,9 @@
  * Date: 20-5-2018
  * Time: 13:46
  */
+
+include("login.php");
+
 ?>
 
     <a class="navbar-brand navigation-brand navigation-link" href="../pages/home.php">Dif Jobs</a>
@@ -27,17 +30,21 @@
         </ul>
 
         <ul class="navbar-nav my-2 my-lg-0">
+            <?php if(!isset($_SESSION['ID'])){?>
             <li class="nav-item">
                 <a class="nav-link navigation-link" href="#" ID="loginBtn">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link navigation-link" href="../pages/signup.php">Registreren</a>
             </li>
+            <?php }
+            else{?>
+                <li class="nav-item">
+                <a class="nav-link navigation-link" href="../pages/logout.php" ID="logUitBtn">Uitloggen</a>
+            </li>
+            <?php }
+            ?>
         </ul>
     </div>
-</div>
 
-<?php
-include("login.php");
-?>
 
