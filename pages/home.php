@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
     <?php
+    session_start();
     include("../template/header.php")
     ?>
 </head>
