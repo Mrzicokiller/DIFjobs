@@ -40,15 +40,9 @@ if (isset($_SESSION['ID'])) {
         $bedrijfsgegevens = $bedrijfGegevensQuery->fetch_array();
 
 
-        $bedrijfsnaam;
-        $bedrijfURL;
-        $bedrijfTel;
-
-        while ($rij = $bedrijfsgegevens) {
-            $bedrijfsnaam = $rij['naamBedrijf'];
-            $bedrijfURL = $rij['webstieUrl'];
-            $bedrijfTel = $rij['tel_nummer'];
-        }
+        $bedrijfsnaam =  $bedrijfsgegevens['naamBedrijf'];
+        $bedrijfURL = $bedrijfsgegevens['websiteUrl'];
+        $bedrijfTel = $bedrijfsgegevens['tel_nummer'];
     }
 
     //check of het een particulier is
@@ -142,7 +136,7 @@ if (isset($_SESSION['ID'])) {
                                            value="<?php echo $_SESSION['name']; ?>" required>
                                 </div>
                                 <div class="col-lg-2 mt-2 pt-sm-4">
-                                    <button onclick="nameSubmit()" class="btn btn-primary">Opslaan</button>
+                                    <button onclick="nameSubmit();" class="btn btn-primary">Opslaan</button>
                                 </div>
                             </div>
                         </form>
@@ -155,7 +149,7 @@ if (isset($_SESSION['ID'])) {
                                            required>
                                 </div>
                                 <div class="col-lg-2 mt-2 pt-sm-4">
-                                    <button onclick="emailSubmit()" class="btn btn-primary">Opslaan
+                                    <button onclick="emailSubmit();" class="btn btn-primary">Opslaan
                                     </button>
                                 </div>
                             </div>
@@ -211,7 +205,7 @@ if (isset($_SESSION['ID'])) {
 
                             <!-- form als gebruiker bedrijf is -->
                             <h3>Bedrijfsgegevens:</h3>
-                            <form name="bedrijfsgegevens" action="../POST/updateUserData.php?T=bedrijf" method="post">
+                            <form name="bedrijfsgegevens">
                                 <div class="form-group">
                                     <label for="Bedrijfsnaam">Bedrijfsnaam:</label>
                                     <input type="text" class="form-control" id="Bedrijfsnaam"
@@ -344,6 +338,15 @@ if (isset($_SESSION['ID'])) {
             //update naar database met ajax
             $.post("../POST/updateUserData.php?type=name", {
                 name: $("#naam").val()
+            },function (result) {
+                if(result)
+                {
+                    alert("yeah");
+                }
+                else
+                {
+                    alert("aaawh");
+                }
             });
         }
 

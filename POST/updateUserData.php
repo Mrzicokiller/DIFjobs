@@ -21,6 +21,15 @@ if($_GET['type'] == 'name')
 
     $_SESSION['name'] = $name;
 
+    if($nameUpdate->num_rows == 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
     $mysqli->close();
 }
 elseif ($_GET['type'] == 'email')
@@ -60,7 +69,7 @@ elseif ($_GET['type'] == 'skill')
 
     $skill = mysqli_real_escape_string($mysqli, $_POST['skill']);
 
-    $skillUpdate = $mysqli->query("UPDATE `Student` SET `Specialisatie`= '".$pass."'WHERE ID = " . $_SESSION['ID']);
+    $skillUpdate = $mysqli->query("UPDATE `Student` SET `Specialisatie`= '".$skill."'WHERE ID = " . $_SESSION['ID']);
 
     $mysqli->close();
 }
