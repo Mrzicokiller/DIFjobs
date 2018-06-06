@@ -50,32 +50,49 @@
 		</div>
 	</div>
 
+
     <?php
     $haalJobQuery = "SELECT * FROM vacature";
     $haalJobs = mysqli_query($mysqli, $haalJobQuery);
+    $counter = 1;
 
     while ($rij = mysqli_fetch_array($haalJobs)) {
+    	if ($counter == 4){
+    		$counter = 1;
+		}
         $jobTitel = $rij['Titel'];
         $jobBeschrijving = $rij['Beschrijving'];
 
+        if ($counter == 1) { ?>
+			<div class="row mt-lg-4 ml-sm-2 mr-sm-2">
+            <?php
+        }
         ?>
 
-		<div class="row mt-lg-4 ml-sm-2 mr-sm-2">
-			<div class="col-lg-4">
-				<div class="card card-green">
-					<div class="card-heading">
-						<div class="row px-sm-3 py-sm-3">
-							<div class="col-lg-12">
-                                <?php echo "$jobTitel" ?>
-							</div>
+		<div class="col-lg-4">
+			<div class="card card-green">
+				<div class="card-heading">
+					<div class="row px-sm-3 py-sm-3">
+						<div class="col-lg-12">
+                            <?php echo "$jobTitel" ?>
 						</div>
 					</div>
+				</div>
 
-					<div class="card-footer">
-                        <?php echo "$jobBeschrijving" ?>
-					</div>
+				<div class="card-footer">
+                    <?php echo "$jobBeschrijving" ?>
 				</div>
 			</div>
 		</div>
-    <?php } ?>
+
+        <?php
+        if ($counter == 3) {
+            ?>
+			</div>
+            <?php
+        }
+        $counter++;
+    } ?>
 </div>
+</body>
+</html>
