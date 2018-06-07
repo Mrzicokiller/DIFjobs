@@ -66,13 +66,13 @@
 					<div class="card-heading">
 						<div class="row px-sm-3 py-sm-3">
 							<div class="col-lg-12">
-                                <?php echo "$jobTitel" ?>
+                                <?php echo $jobTitel; ?>
 							</div>
 						</div>
 					</div>
 
 					<div class="card-footer">
-                        <?php echo "$jobBeschrijving" ?>
+                        <?php echo $jobBeschrijving; ?>
 					</div>
 				</div>
 			</div>

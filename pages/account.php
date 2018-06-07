@@ -67,7 +67,6 @@ if (isset($_SESSION['ID'])) {
 
     }
 
-    $mysqli->close();
 
     ?>
     <html>
@@ -128,82 +127,79 @@ if (isset($_SESSION['ID'])) {
                         <h1 class="card-title">Gegevens</h1>
 
                         <h3>persoonlijke gegevens:</h3>
-                        <form name="changeName">
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="naam">Naam:</label>
-                                    <input type="text" class="form-control" id="naam" placeholder="John Doe"
-                                           value="<?php echo $_SESSION['name']; ?>" required>
-                                </div>
-                                <div class="col-lg-2 mt-2 pt-sm-4">
-                                    <button onclick="nameSubmit();" class="btn btn-primary">Opslaan</button>
-                                </div>
+                        <!-- naam veranderen -->
+                        <div class="row">
+                            <div class="form-group col-lg-3">
+                                <label for="naam">Naam:</label>
+                                <input type="text" class="form-control" id="naam" placeholder="John Doe"
+                                       value="<?php echo $_SESSION['name']; ?>" required>
                             </div>
-                        </form>
-                        <form name="changeEmail">
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email"
-                                           value="<?php echo $_SESSION['email']; ?>"
-                                           required>
-                                </div>
-                                <div class="col-lg-2 mt-2 pt-sm-4">
-                                    <button onclick="emailSubmit();" class="btn btn-primary">Opslaan
-                                    </button>
-                                </div>
+                            <div class="col-lg-2 mt-2 pt-sm-4">
+                                <button onclick="nameSubmit();" class="btn btn-primary">Opslaan</button>
                             </div>
-                            <small class="redLetters" id="emailError">Dit email adres is al in gebruik.</small>
-                        </form>
+                        </div>
+                        <!-- einde naam veranderen-->
+
+                        <!-- email veranderen -->
+                        <div class="row">
+                            <div class="form-group col-lg-3">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email"
+                                       value="<?php echo $_SESSION['email']; ?>"
+                                       required>
+                            </div>
+                            <div class="col-lg-2 mt-2 pt-sm-4">
+                                <button onclick="emailSubmit();" class="btn btn-primary">Opslaan
+                                </button>
+                            </div>
+                        </div>
+                        <small class="redLetters" id="emailError">Dit email adres is al in gebruik.</small>
+                        <!-- einde email veranderen -->
                         <hr/>
 
                         <h3>wachtwoord veranderen:</h3>
-                        <form name="changePassword">
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="password">Nieuw Wachtwoord*</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Wachtwoord"
-                                           required>
-                                </div>
+                        <!-- wachtwoord veranderen -->
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label for="password">Nieuw Wachtwoord*</label>
+                                <input type="password" class="form-control" id="password" placeholder="Wachtwoord"
+                                       required>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="confirmPassword">Herhaal Wachtwoord*</label>
-                                    <input type="password" class="form-control" id="confirmPassword"
-                                           placeholder="Wachtwoord" required>
-                                </div>
-                                <div class="col-sm-3 mt-2 pt-sm-4">
-                                    <button onclick="passwordSubmit()" class="btn btn-primary">Opslaan
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label for="confirmPassword">Herhaal Wachtwoord*</label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                       placeholder="Wachtwoord" required>
                             </div>
-                            <small id="passwordError" class="redLetters">Het wachtwoord is niet het zelfde.</small>
-                        </form>
+                            <div class="col-sm-3 mt-2 pt-sm-4">
+                                <button onclick="passwordSubmit()" class="btn btn-primary">Opslaan
+                                </button>
+                            </div>
+                        </div>
+                        <small id="passwordError" class="redLetters">Het wachtwoord is niet het zelfde.</small>
+                        <!-- einde wachtwoord veranderen -->
 
                         <?php if ($is_student) { ?>
-                            <!-- forms als gebruiker student is -->
+                            <!-- student -->
                             <h3>Specialisatie:</h3>
-                            <form name="specialisatie">
-                                <div class="row">
-                                    <div class="form-group col-lg-2">
-                                        <input type="text" class="form-control" id="specialisatie"
-                                               value="<?php echo $specialisatie; ?>"
-                                               placeholder="C# developer">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button onclick="skillSubmit()" class="btn btn-primary">Opslaan</button>
-                                    </div>
+                            <div class="row">
+                                <div class="form-group col-lg-2">
+                                    <input type="text" class="form-control" id="specialisatie"
+                                           value="<?php echo $specialisatie; ?>"
+                                           placeholder="C# developer">
                                 </div>
-
-
-                            </form>
-
+                                <div class="col-sm-3">
+                                    <button onclick="skillSubmit()" class="btn btn-primary">Opslaan</button>
+                                </div>
+                            </div>
+                            <!-- einde student -->
                         <?php }
 
                         if ($is_bedrijf) {
                             ?>
 
-                            <!-- form als gebruiker bedrijf is -->
+                            <!-- bedrijf -->
                             <h3>Bedrijfsgegevens:</h3>
                             <div class="row">
                                 <div class="form-group col-lg-3">
@@ -235,6 +231,8 @@ if (isset($_SESSION['ID'])) {
                                     <button onclick="bedrijfSubmit();" class="btn btn-primary">Opslaan</button>
                                 </div>
                             </div>
+                            <!-- einde bedrijf -->
+
                         <?php }
                         if ($is_particulier) {
                             ?>
@@ -257,37 +255,40 @@ if (isset($_SESSION['ID'])) {
                     <?php if ($is_bedrijf || $is_particulier) { ?>
                         <div class="card-body" id="jobsBody" hidden>
 
-                            <!-- alleen bedrijf-->
+                            <!-- bedrijf & particulier-->
                             <h1 class="card-title">Vacature</h1>
 
                             <table class="table table-striped table-dark">
                                 <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Titel</th>
                                     <th scope="col">Datum</th>
                                     <th scope="col">Functie</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
+                                <?php
+                                $vacatureQuery = $mysqli->query("SELECT `Titel`, `Datum`, `Functie` 
+                                                                    FROM vacature WHERE gebruikerID = " . $_SESSION['ID']);
+
+                                while ($rij = $vacatureQuery->fetch_array()) {
+                                    $date = date_format(new DateTime($rij['Datum']), "d-m-Y");
+                                    $dateURL = date_format(new DateTime($rij['Datum']), "d-m-Y_h:i:s");
+                                    ?>
+
+
+                                        <tr href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>">
+                                            <th><?php echo $rij['Titel']; ?></th>
+                                            <td><?php echo $date; ?></td>
+                                            <td><?php echo $rij['Functie']; ?></td>
+                                        </tr>
+
+                                    <?php
+                                }
+
+                                $mysqli->close();
+                                ?>
+
                                 </tbody>
                             </table>
                         </div>
