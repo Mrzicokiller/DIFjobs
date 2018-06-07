@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    $("#loginBtn").click(function(){
-        $("#loginModal").modal();
+    $( ".clickbutton" ).on( "click", function() {
+        var titelName = $(this).attr("value");
+        $('.modal-content .respondModalInput').val(titelName);
     });
 });

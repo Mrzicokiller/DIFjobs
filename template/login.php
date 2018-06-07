@@ -1,11 +1,8 @@
-<div class="modal fade" id="loginModal" role="dialog">
+<div class="modal fade" id="loginPopup" role="dialog">
 	<div class="modal-dialog">
 
 		<!-- Modal content-->
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
 			<div class="modal-body">
 				<form role="loginform" method="POST" action="../POST/login.php">
 					<div class="form-group">
@@ -25,12 +22,6 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>
-					Cancel
-				</button>
-				<br>
-				<p>Not a member? <a href="#">Sign Up</a></p><br>
-				<p>Forgot <a href="#">Password?</a></p>
 			</div>
 		</div>
 	</div>
