@@ -43,6 +43,9 @@ include('../config.php');
                                         <a class="nav-link active" id="vacatureTab" href="#">Vacatures</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" id="labelTab" href="#">Labels</a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a class="nav-link" id="studentTab" href="#">Studenten</a>
                                     </li>
                                     <li class="nav-item">
@@ -57,28 +60,66 @@ include('../config.php');
                         <div class="card-body" id="vacatureBody">
                             <?php
                             $vacatureCount = $mysqli->query("SELECT Titel FROM vacature")->num_rows;
-                            echo "Er zijn op dit moment " . $vacatureCount . " vacatures op de website.";
+                            echo "<h3> Er zijn op dit moment " . $vacatureCount . " vacatures op de website.</h3>";
+                            ?>
+                            <table class="table table-striped table-dark" id="vacatureTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Titel</th>
+                                        <th scope="col">Datum</th>
+                                        <th scope="col">Beschrijving</th>
+                                        <th scope="col">Functie</th>
+                                        <th scope="col">Locatie</th>
+                                        <th scope="col">Gebruiker</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                            <?php
+                            $vacatures = $mysqli->query("SELECT * FROM vacature");
+                            while($rij = $vacatures->fetch_array())
+                            {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $rij['Titel'] ;?></td>
+                                        <td><?php echo $rij['Datum'] ;?></td>
+                                        <td><?php echo $rij['Beschrijving'] ;?></td>
+                                        <td><?php echo $rij['Functie'] ;?></td>
+                                        <td><?php echo $rij['Locatie'] ;?></td>
+                                        <td><?php echo $rij['gebruikerID'] ;?></td>
+                                    </tr>
+                                <?php
+                            }
+                            ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-body" id="labelBody" hidden>
+                            <?php
+                            $labelCount = $mysqli->query("SELECT ID FROM v_label")->num_rows;
+                            echo "<h3> Er zijn op dit moment " . $labelCount . " labels.</h3>";
                             ?>
                         </div>
 
                         <div class="card-body" id="studentBody" hidden>
                             <?php
                             $studentCount = $mysqli->query("SELECT ID FROM student")->num_rows;
-                            echo "Er zijn op dit moment " . $studentCount . " studenten geregistreerd.";
+                            echo "<h3> Er zijn op dit moment " . $studentCount . " studenten geregistreerd.</h3>";
                             ?>
                         </div>
 
                         <div class="card-body" id="bedrijfBody" hidden>
                             <?php
                             $bedrijfCount = $mysqli->query("SELECT ID FROM bedrijf")->num_rows;
-                            echo "Er zijn op dit moment " . $bedrijfCount . " bedrijven geregistreerd.";
+                            echo "<h3> Er zijn op dit moment " . $bedrijfCount . " bedrijven geregistreerd.</h3>";
                             ?>
                         </div>
 
                         <div class="card-body" id="particulierBody" hidden>
                             <?php
                             $particulierCount = $mysqli->query("SELECT ID FROM particulier")->num_rows;
-                            echo "Er zijn op dit moment " . $particulierCount . " particulieren geregistreerd.";
+                            echo "<h3> Er zijn op dit moment " . $particulierCount . " particulieren geregistreerd.</h3>";
                             ?>
                         </div>
                     </div>
@@ -87,13 +128,14 @@ include('../config.php');
             }
             else
             {
-                echo "Je hebt geen toegang tot deze pagina!";
+                echo "<h1> Je hebt geen toegang tot deze pagina!</h1>";
             }
             ?>
 
         </div>
     </div>
     <script>
+
         //detecteer click
         $('#vacatureTab').click(function () {
             //verander classes
@@ -101,14 +143,16 @@ include('../config.php');
             $('#studentTab').removeClass('active');
             $('#bedrijfTab').removeClass('active');
             $('#particulierTab').removeClass('active');
+            $('#labelTab').removeClass('active');
             //laat de body zien van de geklikte tab
             $('#vacatureBody').removeAttr('hidden');
             //als 1 van de ander body's nog niet hidden is, maak ze dan hidden
-            if(!$('#bedrijfBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#particulierBody').attr('hidden'))
+            if(!$('#bedrijfBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#particulierBody').attr('hidden') || !$('#labelBody').attr('hidden'))
             {
                 $('#studentBody').attr('hidden', true);
                 $('#bedrijfBody').attr('hidden', true);
                 $('#particulierBody').attr('hidden', true);
+                $('#labelBody').attr('hidden', true);
             }
         });
         $('#studentTab').click(function () {
@@ -117,11 +161,13 @@ include('../config.php');
             $('#vacatureTab').removeClass('active');
             $('#studentBody').removeAttr('hidden');
             $('#particulierTab').removeClass('active');
-            if(!$('#vacatureBody').attr('hidden') || !$('#bedrijfBody').attr('hidden') || !$('#particulierBody').attr('hidden'))
+            $('#labelTab').removeClass('active');
+            if(!$('#vacatureBody').attr('hidden') || !$('#bedrijfBody').attr('hidden') || !$('#particulierBody').attr('hidden')|| !$('#labelBody').attr('hidden'))
             {
                 $('#bedrijfBody').attr('hidden', true);
                 $('#vacatureBody').attr('hidden', true);
                 $('#particulierBody').attr('hidden', true);
+                $('#labelBody').attr('hidden', true);
             }
         });
         $('#bedrijfTab').click(function () {
@@ -130,11 +176,13 @@ include('../config.php');
             $('#vacatureTab').removeClass('active');
             $('#bedrijfBody').removeAttr('hidden');
             $('#particulierTab').removeClass('active');
-            if(!$('#vacatureBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#particulierBody').attr('hidden'))
+            $('#labelTab').removeClass('active');
+            if(!$('#vacatureBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#particulierBody').attr('hidden')|| !$('#labelBody').attr('hidden'))
             {
                 $('#studentBody').attr('hidden', true);
                 $('#vacatureBody').attr('hidden', true);
                 $('#particulierBody').attr('hidden', true);
+                $('#labelBody').attr('hidden', true);
             }
         });
 
@@ -144,11 +192,29 @@ include('../config.php');
             $('#vacatureTab').removeClass('active');
             $('#particulierBody').removeAttr('hidden');
             $('#bedrijfTab').removeClass('active');
-            if(!$('#vacatureBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#bedrijfBody').attr('hidden'))
+            $('#labelTab').removeClass('active');
+            if(!$('#vacatureBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#bedrijfBody').attr('hidden')|| !$('#labelBody').attr('hidden'))
             {
                 $('#studentBody').attr('hidden', true);
                 $('#vacatureBody').attr('hidden', true);
                 $('#bedrijfBody').attr('hidden', true);
+                $('#labelBody').attr('hidden', true);
+            }
+        });
+
+        $('#labelTab').click(function () {
+            $('#particulierTab').addClass('active');
+            $('#studentTab').removeClass('active');
+            $('#vacatureTab').removeClass('active');
+            $('#labelBody').removeAttr('hidden');
+            $('#bedrijfTab').removeClass('active');
+            $('#particulierTab').removeClass('active');
+            if(!$('#vacatureBody').attr('hidden') || !$('#studentBody').attr('hidden') || !$('#bedrijfBody').attr('hidden')|| !$('#particulierBody').attr('hidden'))
+            {
+                $('#studentBody').attr('hidden', true);
+                $('#vacatureBody').attr('hidden', true);
+                $('#bedrijfBody').attr('hidden', true);
+                $('#particulierBody').attr('hidden', true);
             }
         });
     </script>
