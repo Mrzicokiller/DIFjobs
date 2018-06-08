@@ -179,6 +179,7 @@ if (isset($_SESSION['ID'])) {
                         </div>
                         <small id="passwordError" class="redLetters">Het wachtwoord is niet het zelfde.</small>
                         <!-- einde wachtwoord veranderen -->
+                        <hr/>
 
                         <?php if ($is_student) { ?>
                             <!-- student -->
@@ -194,6 +195,7 @@ if (isset($_SESSION['ID'])) {
                                 </div>
                             </div>
                             <!-- einde student -->
+                            <hr/>
                         <?php }
 
                         if ($is_bedrijf) {
@@ -232,22 +234,24 @@ if (isset($_SESSION['ID'])) {
                                 </div>
                             </div>
                             <!-- einde bedrijf -->
+                            <hr/>
 
                         <?php }
                         if ($is_particulier) {
                             ?>
-                            <!-- form als gebruiker particulier is -->
+                            <!-- particulier -->
                             <h3>Telefoonnummer:</h3>
-                            <form name="telefoonnummer" action="../POST/updateUserData.php?T=particulier" method="post">
-
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-2">
                                     <label for="phoneNumber">Telefoonnummer:</label>
-                                    <input type="url" class="form-control" id="phoneNumber" placeholder="0612345678">
+                                    <input type="url" class="form-control" id="phoneNumber" value="<?php echo $particulierTel; ?>" placeholder="0612345678">
                                 </div>
 
-                                <br/>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                                <div class="col-sm-3 mt-2 pt-sm-4">
+                                    <button onclick="particulierSubmit();" class="btn btn-primary">Opslaan</button>
+                                </div>
+                            </div>                            <!-- einde particulier -->
+
                         <?php } ?>
 
                     </div>
@@ -264,6 +268,7 @@ if (isset($_SESSION['ID'])) {
                                     <th scope="col">Titel</th>
                                     <th scope="col">Datum</th>
                                     <th scope="col">Functie</th>
+                                    <th scope="col">aanpassen</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -277,10 +282,11 @@ if (isset($_SESSION['ID'])) {
                                     ?>
 
 
-                                        <tr href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>">
+                                        <tr>
                                             <th><?php echo $rij['Titel']; ?></th>
                                             <td><?php echo $date; ?></td>
                                             <td><?php echo $rij['Functie']; ?></td>
+                                            <td><a href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span class="fa fa-edit"></span></a></td>
                                         </tr>
 
                                     <?php
