@@ -244,7 +244,7 @@ if (isset($_SESSION['ID'])) {
                             <div class="row">
                                 <div class="form-group col-lg-2">
                                     <label for="phoneNumber">Telefoonnummer:</label>
-                                    <input type="url" class="form-control" id="phoneNumber" value="<?php echo $particulierTel; ?>" placeholder="0612345678">
+                                    <input type="url" class="form-control" id="particulierPhone" value="<?php echo $particulierTel; ?>" placeholder="0612345678">
                                 </div>
 
                                 <div class="col-sm-3 mt-2 pt-sm-4">
@@ -291,8 +291,6 @@ if (isset($_SESSION['ID'])) {
 
                                     <?php
                                 }
-
-                                $mysqli->close();
                                 ?>
 
                                 </tbody>
@@ -309,31 +307,31 @@ if (isset($_SESSION['ID'])) {
                             <table class="table table-striped table-dark">
                                 <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Titel</th>
-                                    <th scope="col">Datum</th>
                                     <th scope="col">Functie</th>
+                                    <th scope="col">Naam</th>
+                                    <th scope="col">Datum</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
+                                <?php
+                                $reactieQuery = $mysqli->query("SELECT v.Titel, v.Functie, g.Naam, r.datum FROM reactie r
+                                                                JOIN gebruiker g ON r.VgebruikerID = g.ID
+                                                                JOIN vacature v ON (r.Vtitel = v.Titel AND r.Vdatum = v.Datum AND r.VgebruikerID = v.gebruikerID)
+                                                                WHERE r.SgebruikerID = ". $_SESSION['ID']);
+
+                                while ($rij = $reactieQuery->fetch_array()) {
+                                ?>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
+                                    <td><?php echo $rij['Titel']?></td>
+                                    <td><?php echo $rij['Functie']?></td>
+                                    <td><?php echo $rij['Naam']?></td>
+                                    <td><?php echo $rij['datum']?></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
+                               <?php }
+                               $mysqli->close();
+                               ?>
                                 </tbody>
                             </table>
                         </div>
@@ -354,15 +352,6 @@ if (isset($_SESSION['ID'])) {
             //update naar database met ajax
             $.post("../POST/updateUserData.php?type=name", {
                 name: $("#naam").val()
-            }, function (result) {
-                if (result) {
-                    //als de update is gelukt
-                    alert("yeah");
-                }
-                else {
-                    //als de update niet is gelukt
-                    alert("aaawh");
-                }
             });
         }
 
@@ -416,6 +405,12 @@ if (isset($_SESSION['ID'])) {
                 name: $("#Bedrijfsnaam").val(),
                 url: $("#webURL").val(),
                 tel: $("#phoneNumber").val()
+            });
+        }
+
+        function particulierSubmit() {
+            $.post("../POST/updateUserData.php?type=particulier", {
+                tel: $("#particulierPhone").val()
             });
         }
 

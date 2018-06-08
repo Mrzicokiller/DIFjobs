@@ -87,3 +87,13 @@ elseif ($_GET['type'] == 'bedrijf')
 
     $mysqli->close();
 }
+
+elseif ($_GET['type'] == 'particulier')
+{
+    $particulierTel = mysqli_real_escape_string($mysqli, $_POST['tel']);
+
+
+    $particulierUpdate = $mysqli->query("UPDATE `particulier` SET `tel_nummer`= '".$particulierTel."' WHERE ID = ".$_SESSION['ID']);
+
+    $mysqli->close();
+}
