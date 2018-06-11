@@ -87,6 +87,8 @@ include('../config.php');
                                         <td><?php echo $rij['Functie'] ;?></td>
                                         <td><?php echo $rij['Locatie'] ;?></td>
                                         <td><?php echo $rij['gebruikerID'] ;?></td>
+                                        <td><a href="admin_wijzigen.php" class="btn btn-warning">Wijzigen</a></td>
+                                        <td><a onclick="verwijderVacature('<?php echo $rij['Titel'];?>', '<?php echo $rij['Datum'];?>', '<?php echo $rij['gebruikerID']; ?>');" class="btn btn-danger">Verwijderen</a></td>
                                     </tr>
                                 <?php
                             }
@@ -155,6 +157,7 @@ include('../config.php');
                 $('#labelBody').attr('hidden', true);
             }
         });
+
         $('#studentTab').click(function () {
             $('#studentTab').addClass('active');
             $('#bedrijfTab').removeClass('active');
@@ -170,6 +173,7 @@ include('../config.php');
                 $('#labelBody').attr('hidden', true);
             }
         });
+
         $('#bedrijfTab').click(function () {
             $('#bedrijfTab').addClass('active');
             $('#studentTab').removeClass('active');
@@ -217,6 +221,11 @@ include('../config.php');
                 $('#particulierBody').attr('hidden', true);
             }
         });
+
+        function verwijderVacature(titel, datum, gebruikerID)
+        {
+
+        }
     </script>
     </body>
 </html>
