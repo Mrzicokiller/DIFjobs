@@ -87,8 +87,8 @@ include('../config.php');
                                         <td><?php echo $rij['Functie'] ;?></td>
                                         <td><?php echo $rij['Locatie'] ;?></td>
                                         <td><?php echo $rij['gebruikerID'] ;?></td>
-                                        <td><a href="admin_wijzigen.php" class="btn btn-warning">Wijzigen</a></td>
-                                        <td><a onclick="verwijderVacature('<?php echo $rij['Titel'];?>', '<?php echo $rij['Datum'];?>', '<?php echo $rij['gebruikerID']; ?>');" class="btn btn-danger">Verwijderen</a></td>
+                                        <td><button class="btn btn-warning">Wijzigen</button></td>
+                                        <td><button onclick="verwijderVacature('<?php echo $rij['Titel'];?>', '<?php echo $rij['Datum'];?>', '<?php echo $rij['gebruikerID']; ?>');" class="btn btn-danger">Verwijderen</button></td>
                                     </tr>
                                 <?php
                             }
@@ -224,8 +224,25 @@ include('../config.php');
 
         function verwijderVacature(titel, datum, gebruikerID)
         {
-
+            $.post('admin_verwijderen.php',{
+                type: 'vacature',
+                titel: titel,
+                datum: datum,
+                gebruikerID: gebruikerID
+            },
+            function (result) {
+                if(result == 1)
+                {
+                    location.reload(true);
+                }
+                else
+                {
+                    alert(result);
+                }
+            });
         }
+
+
     </script>
     </body>
 </html>
