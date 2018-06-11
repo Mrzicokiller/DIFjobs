@@ -102,6 +102,36 @@ include('../config.php');
                             $labelCount = $mysqli->query("SELECT ID FROM v_label")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $labelCount . " labels.</h3>";
                             ?>
+                            <form class="form-control" onsubmit="uploadLabel();">
+                                <label for="trefwoord">Trefwoord</label>
+                                <input id="trefwoord" type="text" name="trefwoord">
+                                <button type="submit" class="btn btn-primary">Uploaden</button>
+                            </form>
+
+                            <table class="table table-striped table-dark" id="labelTable">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Trefwoord</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <?php
+                                $vacatures = $mysqli->query("SELECT * FROM v_label");
+                                while($rij = $vacatures->fetch_array())
+                                {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $rij['ID'] ;?></td>
+                                        <td><?php echo $rij['Trefwoord'] ;?></td>
+                                        <td><button onclick="verwijderLabel(<?php echo $rij['ID'] ;?>)" class="btn btn-danger">Verwijderen</button></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="card-body" id="studentBody" hidden>
@@ -242,6 +272,41 @@ include('../config.php');
             });
         }
 
+        function verwijderLabel(ID)
+        {
+            $.post('admin_verwijderen.php',{
+                    type: 'label',
+                    ID: ID
+                },
+                function (result) {
+                    if(result == 1)
+                    {
+                        location.reload(true);
+                    }
+                    else
+                    {
+                        alert(result);
+                    }
+                });
+        }
+
+        function uploadLabel()
+        {
+            var trefwoord = $("#trefwoord").val();
+
+            $.post('admin_wijzigen.php', {
+                type: 'newLabel',
+                trefwoord: trefwoord
+            },
+                function (result) {
+                    if (result == 1) {
+                        location.reload(true);
+                    }
+                    else {
+                        alert(result);
+                    }
+                });
+        }
 
     </script>
     </body>
