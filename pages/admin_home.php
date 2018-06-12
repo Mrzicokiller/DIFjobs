@@ -140,6 +140,36 @@ include('../template/admin_vacature_wijzigen.php');
                             $studentCount = $mysqli->query("SELECT ID FROM student")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $studentCount . " studenten geregistreerd.</h3>";
                             ?>
+                            <table class="table table-striped table-dark" id="labelTable">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Naam</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">AVGcheck</th>
+                                    <th scope="col">Verified</th>
+                                    <th scope="col">Specialisatie</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $studenten = $mysqli->query("SELECT * FROM gebruiker JOIN student s on gebruiker.ID = s.ID");
+                                    while($rij = $studenten->fetch_array())
+                                    {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $rij['ID']; ?></td>
+                                            <td><?php echo $rij['Naam']; ?></td>
+                                            <td><?php echo $rij['Email']; ?></td>
+                                            <td><?php echo $rij['AVGcheck']; ?></td>
+                                            <td><?php echo $rij['veriefied']; ?></td>
+                                            <td><?php echo $rij['Specialisatie']; ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="card-body" id="bedrijfBody" hidden>
@@ -147,6 +177,40 @@ include('../template/admin_vacature_wijzigen.php');
                             $bedrijfCount = $mysqli->query("SELECT ID FROM bedrijf")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $bedrijfCount . " bedrijven geregistreerd.</h3>";
                             ?>
+                            <table class="table table-striped table-dark" id="labelTable">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Naam</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">AVGcheck</th>
+                                    <th scope="col">Verified</th>
+                                    <th scope="col">Bedrijfs naam</th>
+                                    <th scope="col">Website</th>
+                                    <th scope="col">Tel_nummer</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $studenten = $mysqli->query("SELECT * FROM gebruiker JOIN bedrijf b on gebruiker.ID = b.ID");
+                                while($rij = $studenten->fetch_array())
+                                {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $rij['ID']; ?></td>
+                                        <td><?php echo $rij['Naam']; ?></td>
+                                        <td><?php echo $rij['Email']; ?></td>
+                                        <td><?php echo $rij['AVGcheck']; ?></td>
+                                        <td><?php echo $rij['veriefied']; ?></td>
+                                        <td><?php echo $rij['naamBedrijf']; ?></td>
+                                        <td><?php echo $rij['websiteUrl']; ?></td>
+                                        <td><?php echo $rij['tel_nummer']; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="card-body" id="particulierBody" hidden>
@@ -154,6 +218,36 @@ include('../template/admin_vacature_wijzigen.php');
                             $particulierCount = $mysqli->query("SELECT ID FROM particulier")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $particulierCount . " particulieren geregistreerd.</h3>";
                             ?>
+                            <table class="table table-striped table-dark" id="labelTable">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Naam</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">AVGcheck</th>
+                                    <th scope="col">Verified</th>
+                                    <th scope="col">Tel_nummer</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $studenten = $mysqli->query("SELECT * FROM gebruiker JOIN particulier p on gebruiker.ID = p.ID");
+                                while($rij = $studenten->fetch_array())
+                                {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $rij['ID']; ?></td>
+                                        <td><?php echo $rij['Naam']; ?></td>
+                                        <td><?php echo $rij['Email']; ?></td>
+                                        <td><?php echo $rij['AVGcheck']; ?></td>
+                                        <td><?php echo $rij['veriefied']; ?></td>
+                                        <td><?php echo $rij['tel_nummer']; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
