@@ -13,14 +13,9 @@
         $trefwoord = $_POST['trefwoord'];
         $mysqli->query("INSERT INTO v_label VALUES(NULL,'$trefwoord')");
         echo 1;
+        $mysqli->close();
 
     }
-    elseif($_POST['type'] == "vacature")
-    {
-        $titel = $_POST['titel'];
-        $datum  =$_POST['datum'];
-        $gebruikerID = $_POST['ID'];
-        $vacature = $mysqli->query("SELECT * FROM vacature WHERE Titel = '$titel' AND Datum = '$datum' AND gebruikerID = '$gebruikerID'");
-    }
+
 ?>
 

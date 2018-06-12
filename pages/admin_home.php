@@ -7,6 +7,7 @@
  */
 session_start();
 include('../config.php');
+include('../template/admin_vacature_wijzigen.php');
 ?>
 <html>
     <head>
@@ -87,7 +88,7 @@ include('../config.php');
                                         <td><?php echo $rij['Functie'] ;?></td>
                                         <td><?php echo $rij['Locatie'] ;?></td>
                                         <td><?php echo $rij['gebruikerID'] ;?></td>
-                                        <td><button class="btn btn-warning">Wijzigen</button></td>
+                                        <td><button onclick="updateVacature('<?php echo $rij['Titel'];?>', '<?php echo $rij['Datum'];?>', '<?php echo $rij['gebruikerID']; ?>');" class="btn btn-warning">Wijzigen</button></td>
                                         <td><button onclick="verwijderVacature('<?php echo $rij['Titel'];?>', '<?php echo $rij['Datum'];?>', '<?php echo $rij['gebruikerID']; ?>');" class="btn btn-danger">Verwijderen</button></td>
                                     </tr>
                                 <?php
@@ -269,6 +270,26 @@ include('../config.php');
                 {
                     alert(result);
                 }
+            });
+        }
+
+        function updateVacature(titel, datum, gebruikerID)
+        {
+            $.post('admin_get_vacature.php',{
+                titel: titel,
+                datum: datum,
+                gebruikerID: gebruikerID
+            },
+            function(result)
+            {
+                result = JSON.parse(result);
+                $('#job').val(result.Functie);
+                $('#location').val(result.Locatie);
+                $('#description').val(result.Beschrijving);
+                $('#date').val(result.Datum);
+                $('#title').val(result.Titel);
+
+                $('#adminVacatureWijzigen').modal();
             });
         }
 
