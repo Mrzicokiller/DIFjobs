@@ -106,7 +106,7 @@ include('../template/admin_vacature_wijzigen.php');
                             <form class="form-control" onsubmit="uploadLabel();">
                                 <label for="trefwoord">Trefwoord</label>
                                 <input id="trefwoord" type="text" name="trefwoord">
-                                <button type="submit" class="btn btn-primary">Uploaden</button>
+                                <button type="submit" class="btn btn-primary">Aanmaken</button>
                             </form>
 
                             <table class="table table-striped table-dark" id="labelTable">
