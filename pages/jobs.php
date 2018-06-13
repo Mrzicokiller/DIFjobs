@@ -64,6 +64,8 @@ session_start();
     <?php
     $haalJobQuery = "SELECT * FROM vacature";
     $haalJobs = mysqli_query($mysqli, $haalJobQuery);
+    $counter = 1;
+
 
     while ($rij = mysqli_fetch_assoc($haalJobs)) {  ?>
 
