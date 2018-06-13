@@ -30,9 +30,15 @@ $jobTitle = mysqli_real_escape_string($mysqli, $jobLocatie);
 //zelfde als hierboven maar dan met omschrijving
 $jobTitle = mysqli_real_escape_string($mysqli, $jobBeschrijving);
 
-if($mysqli->query('INSERT INTO vacature VALUES("'. $jobTitle .'", "'.$postDatum .'", "' .  $jobBeschrijving  . '", "'.$jobTitle. '", "'.$jobLocatie. '", "'.$_SESSION["ID"].'")'))
+//query voor het posten van een job
+$result = $mysqli->query('INSERT INTO vacature VALUES("'. $jobTitle .'", "'.$postDatum .'", "' .  $jobBeschrijving  .
+    '", "'.$jobTitle. '", "'.$jobLocatie. '", "'.$_SESSION["ID"].'")');
+
+//als query succesvol uitgevoerd wordt
+if($result)
 {
     echo "succesfully posted";
 } else{
+    //zo niet dan:
     echo "failed to post";
 }

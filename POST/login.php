@@ -20,26 +20,19 @@ $loginemail = mysqli_real_escape_string($mysqli, $loginemail);
 $loginwachtwoord = mysqli_real_escape_string($mysqli, $loginwachtwoord);
 
 //var met query die controleert of email bestaat
-$checkEmailExistQuery = "SELECT * FROM gebruiker WHERE email = '$loginemail'";
+$checkEmailExist = $mysqli->query("SELECT * FROM gebruiker WHERE email = '$loginemail'");
 
-//var met uitkomst query
-$checkEmailExist = mysqli_query($mysqli, $checkEmailExistQuery);
+if ($checkEmailExist) {
 
-if (mysqli_num_rows($checkEmailExist) > 0) {
     //var met query die het wachtwoord ophaalt
-
-    $getPasswordQuery = "SELECT ID, Naam, wachtwoord, Is_admin FROM gebruiker WHERE email = '$loginemail'";
-
-    //uitkomst van de query
-    $getPassword = mysqli_query($mysqli, $getPasswordQuery);
+    $getPassword = $mysqli->query("SELECT ID, Naam, wachtwoord, Is_admin FROM gebruiker WHERE email = '$loginemail'");
 
     //while loop die value uit  de row haalt en in var checkPassword zet
-    while($rij = mysqli_fetch_array($getPassword)){
+    while($rij = $getPassword->fetch_array()){
         $checkPassword = $rij['wachtwoord'];
         $ID = $rij['ID'];
         $name = $rij['Naam'];
         $admin = $rij['Is_admin'];
-
     }
 
     if(password_verify($loginwachtwoord, $checkPassword)) {
