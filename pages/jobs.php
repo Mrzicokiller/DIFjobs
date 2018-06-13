@@ -1,10 +1,20 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <?php
+
+
     include("../template/header.php");
 
     include_once('../config.php');
+
+    if (isset($_SESSION['ID'])) {
+    include ('../template/respond.php');
+	}
 
     ?>
 </head>
@@ -56,43 +66,19 @@
     $haalJobs = mysqli_query($mysqli, $haalJobQuery);
     $counter = 1;
 
-    while ($rij = mysqli_fetch_array($haalJobs)) {
-    	if ($counter == 4){
-    		$counter = 1;
-		}
-        $jobTitel = $rij['Titel'];
-        $jobBeschrijving = $rij['Beschrijving'];
 
-        if ($counter == 1) { ?>
-			<div class="row mt-lg-4 ml-sm-2 mr-sm-2">
-            <?php
-        }
-        ?>
+    while ($rij = mysqli_fetch_assoc($haalJobs)) {  ?>
 
-		<div class="col-lg-4">
-			<div class="card card-green">
-				<div class="card-heading">
-					<div class="row px-sm-3 py-sm-3">
-						<div class="col-lg-12">
-                            <?php echo "$jobTitel" ?>
-						</div>
-					</div>
-				</div>
-
-				<div class="card-footer">
-                    <?php echo "$jobBeschrijving" ?>
-				</div>
+		<div class="card mt-2 mr-2 mb-2 ml-2" style="width:30vw; float:left;">
+			<div class="card-body">
+				<h5 class="card-title"><?php echo $rij['Titel']; ?></h5>
+				<p class="card-text"><?php echo $rij['Beschrijving']; ?></p>
+				<a href="#" class="btn btn-primary clickbutton" data-toggle="modal" data-target="#respondPopup"  ID="respondBtn" name="respondBtn" value="<?php echo $rij['Titel']; ?>">Reageer</a>
 			</div>
 		</div>
 
-        <?php
-        if ($counter == 3) {
-            ?>
-			</div>
-            <?php
-        }
-        $counter++;
-    } ?>
+    <?php } ?>
+
 </div>
 </body>
 </html>

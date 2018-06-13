@@ -32,7 +32,7 @@ include("login.php");
         <ul class="navbar-nav my-2 my-lg-0">
             <?php if(!isset($_SESSION['ID'])){?>
             <li class="nav-item">
-                <a class="nav-link navigation-link" href="#" ID="loginBtn">Login</a>
+                <a class="nav-link navigation-link" href="#" data-toggle="modal" data-target="#loginPopup">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link navigation-link" href="../pages/signup.php">Registreren</a>
