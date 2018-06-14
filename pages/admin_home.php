@@ -5,6 +5,8 @@
  * Date: 6-6-2018
  * Time: 11:39
  */
+
+// alle bestanden ophalen die nodig zijn
 session_start();
 include('../config.php');
 include('../template/admin_vacature_wijzigen.php');
@@ -32,6 +34,7 @@ include('../template/admin_vacature_wijzigen.php');
         <div class="row ml-sm-2 mr-sm-2">
 
             <?php
+            //als je admin bent heb je toegang tot de pagina
             if($_SESSION["admin"] == 1)
             {
                 ?>
@@ -60,6 +63,7 @@ include('../template/admin_vacature_wijzigen.php');
                         </div>
                         <div class="card-body" id="vacatureBody">
                             <?php
+                            //vacatures tellen
                             $vacatureCount = $mysqli->query("SELECT Titel FROM vacature")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $vacatureCount . " vacatures op de website.</h3>";
                             ?>
@@ -77,6 +81,7 @@ include('../template/admin_vacature_wijzigen.php');
                                 <tbody>
 
                             <?php
+                            //vacature uitlezen en in de table zetten
                             $vacatures = $mysqli->query("SELECT * FROM vacature");
                             while($rij = $vacatures->fetch_array())
                             {
@@ -100,9 +105,11 @@ include('../template/admin_vacature_wijzigen.php');
 
                         <div class="card-body" id="labelBody" hidden>
                             <?php
+                            //labels tellen
                             $labelCount = $mysqli->query("SELECT ID FROM v_label")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $labelCount . " labels.</h3>";
                             ?>
+                            <!--Label input-->
                             <form class="form-control" onsubmit="uploadLabel();">
                                 <label for="trefwoord">Trefwoord</label>
                                 <input id="trefwoord" type="text" name="trefwoord">
@@ -119,8 +126,9 @@ include('../template/admin_vacature_wijzigen.php');
                                 <tbody>
 
                                 <?php
-                                $vacatures = $mysqli->query("SELECT * FROM v_label");
-                                while($rij = $vacatures->fetch_array())
+                                //labels uitlezen en in table zetten
+                                $labels = $mysqli->query("SELECT * FROM v_label");
+                                while($rij = $labels->fetch_array())
                                 {
                                     ?>
                                     <tr>
@@ -137,6 +145,7 @@ include('../template/admin_vacature_wijzigen.php');
 
                         <div class="card-body" id="studentBody" hidden>
                             <?php
+                            //studenten tellen
                             $studentCount = $mysqli->query("SELECT ID FROM student")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $studentCount . " studenten geregistreerd.</h3>";
                             ?>
@@ -153,6 +162,7 @@ include('../template/admin_vacature_wijzigen.php');
                                 </thead>
                                 <tbody>
                                 <?php
+                                //query uitlezen en in de table zetten
                                     $studenten = $mysqli->query("SELECT * FROM gebruiker JOIN student s on gebruiker.ID = s.ID");
                                     while($rij = $studenten->fetch_array())
                                     {
@@ -174,6 +184,7 @@ include('../template/admin_vacature_wijzigen.php');
 
                         <div class="card-body" id="bedrijfBody" hidden>
                             <?php
+                            //bedrijven tellen
                             $bedrijfCount = $mysqli->query("SELECT ID FROM bedrijf")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $bedrijfCount . " bedrijven geregistreerd.</h3>";
                             ?>
@@ -192,8 +203,9 @@ include('../template/admin_vacature_wijzigen.php');
                                 </thead>
                                 <tbody>
                                 <?php
-                                $studenten = $mysqli->query("SELECT * FROM gebruiker JOIN bedrijf b on gebruiker.ID = b.ID");
-                                while($rij = $studenten->fetch_array())
+                                //query uitlezen en in de table zetten
+                                $bedrijven = $mysqli->query("SELECT * FROM gebruiker JOIN bedrijf b on gebruiker.ID = b.ID");
+                                while($rij = $bedrijven->fetch_array())
                                 {
                                     ?>
                                     <tr>
@@ -215,6 +227,7 @@ include('../template/admin_vacature_wijzigen.php');
 
                         <div class="card-body" id="particulierBody" hidden>
                             <?php
+                            //particulieren tellen
                             $particulierCount = $mysqli->query("SELECT ID FROM particulier")->num_rows;
                             echo "<h3> Er zijn op dit moment " . $particulierCount . " particulieren geregistreerd.</h3>";
                             ?>
@@ -231,8 +244,9 @@ include('../template/admin_vacature_wijzigen.php');
                                 </thead>
                                 <tbody>
                                 <?php
-                                $studenten = $mysqli->query("SELECT * FROM gebruiker JOIN particulier p on gebruiker.ID = p.ID");
-                                while($rij = $studenten->fetch_array())
+                                //query uitlezen en in de table zetten
+                                $particulier = $mysqli->query("SELECT * FROM gebruiker JOIN particulier p on gebruiker.ID = p.ID");
+                                while($rij = $particulier->fetch_array())
                                 {
                                     ?>
                                     <tr>
@@ -347,35 +361,42 @@ include('../template/admin_vacature_wijzigen.php');
             }
         });
 
+        //vacature verwijder functie
         function verwijderVacature(titel, datum, gebruikerID)
         {
-            $.post('admin_verwijderen.php',{
+            //maak een post naar de verwerkpagina
+            $.post('../POST/admin_verwijderen.php',{
                 type: 'vacature',
                 titel: titel,
                 datum: datum,
                 gebruikerID: gebruikerID
             },
             function (result) {
+                //als het gelukt is (result = 1) dan reload de pagina
                 if(result == 1)
                 {
                     location.reload(true);
                 }
                 else
                 {
+                    //gaat het fout laat dan de error zien
                     alert(result);
                 }
             });
         }
 
+        //vacature update functie
         function updateVacature(titel, datum, gebruikerID)
         {
-            $.post('admin_get_vacature.php',{
+            //maak een post naar de verwerkpagina om alle gegevens van de vaacature op te halen
+            $.post('../POST/admin_get_vacature.php',{
                 titel: titel,
                 datum: datum,
                 gebruikerID: gebruikerID
             },
             function(result)
             {
+                //de gegevens in form van de modal (admin_vacature_wijzigen.php) zetten en openen.
                 result = JSON.parse(result);
                 $('#job').val(result.Functie);
                 $('#location').val(result.Locatie);
@@ -387,13 +408,16 @@ include('../template/admin_vacature_wijzigen.php');
             });
         }
 
+        //label verwijder functie
         function verwijderLabel(ID)
         {
-            $.post('admin_verwijderen.php',{
+            //maak een post naar de verwijder functie
+            $.post('../POST/admin_verwijderen.php',{
                     type: 'label',
                     ID: ID
                 },
                 function (result) {
+                //als het gelukt is (result = 1) dan reload de pagina
                     if(result == 1)
                     {
                         location.reload(true);
@@ -405,15 +429,19 @@ include('../template/admin_vacature_wijzigen.php');
                 });
         }
 
+        //label upload functie
         function uploadLabel()
         {
+            //haal het trefwoord uit de input
             var trefwoord = $("#trefwoord").val();
 
-            $.post('admin_wijzigen.php', {
+            //maak een post naar de verwerk pagina
+            $.post('../POST/admin_label_uploaden.php', {
                 type: 'newLabel',
                 trefwoord: trefwoord
             },
                 function (result) {
+                //als het gelukt is reload de pagina
                     if (result == 1) {
                         location.reload(true);
                     }

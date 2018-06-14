@@ -12,12 +12,12 @@ if (isset($_SESSION['ID'])) {
     require_once("../config.php");
 
     //escape alle data die we gaan gebruiken in de query
-    $job = mysqli_real_escape_string($mysqli, $_POST['job']);
-    $location = mysqli_real_escape_string($mysqli, $_POST['location']);
-    $description = mysqli_real_escape_string($mysqli, $_POST['description']);
-    $date = mysqli_real_escape_string($mysqli, $_POST['date']);
+    $job = $mysqli->real_escape_string($_POST['job']);
+    $location = $mysqli->real_escape_string($_POST['location']);
+    $description = $mysqli->real_escape_string($_POST['description']);
+    $date = $mysqli->real_escape_string($_POST['date']);
     $date = date_format(new DateTime($date), "Y-m-d h:i:s");
-    $title = mysqli_real_escape_string($mysqli, $_POST['title']);
+    $title = $mysqli->real_escape_string($_POST['title']);
 
     //maak en doe query
     $vacatureQuery = $mysqli->query("UPDATE `vacature` SET `Beschrijving`= '" . $description . "',`Functie`= '" . $job . "',`Locatie`= '" . $location . "'

@@ -19,10 +19,10 @@ $confPassword = $_POST['confirmPassword'];
 $avgCheck = $_POST['avgCheck'];
 
 //zorg ervoor dat er geen sql injections of html code in de string staat
-$naam = mysqli_real_escape_string($mysqli, $naam);
-$email = mysqli_real_escape_string($mysqli, $email);
-$password = mysqli_real_escape_string($mysqli, $password);
-$confPassword = mysqli_real_escape_string($mysqli, $confPassword);
+$naam = $mysqli->real_escape_string($naam);
+$email = $mysqli->real_escape_string($email);
+$password = $mysqli->real_escape_string($password);
+$confPassword = $mysqli->real_escape_string($confPassword);
 
 //maak een verificatie code aan
 $verifiedCode = code_generator(10);
@@ -54,6 +54,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 else
 {
+    //wachtwoord hashen
     $password = password_hash($password, PASSWORD_BCRYPT);
 
     if($avgCheck == "on")
@@ -65,7 +66,7 @@ else
         $avgCheck = false;
     }
 
-
+    //gebruiker in de database zetten
     if($mysqli->query('INSERT INTO Gebruiker VALUES(NULL, "'. $naam .'", "'.$password .'", "' .  $email  . '", "'.$avgCheck. '", "' . $verifiedCode . '", false ,false)'))
 
     {

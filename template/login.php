@@ -1,3 +1,4 @@
+<!--Modal voor de login-->
 <div class="modal fade" id="loginPopup" role="dialog">
 	<div class="modal-dialog">
 

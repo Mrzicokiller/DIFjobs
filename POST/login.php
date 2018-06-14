@@ -14,10 +14,10 @@ $loginemail = $_POST['loginEmail'];
 $loginwachtwoord = $_POST['loginWachtwoord'];
 
 //email checken of het een echt email is en geen SQL injectie
-$loginemail = mysqli_real_escape_string($mysqli, $loginemail);
+$loginemail = $mysqli->real_escape_string($loginemail);
 
 //wachtwoord checken of het een echt email is en geen SQL injectie
-$loginwachtwoord = mysqli_real_escape_string($mysqli, $loginwachtwoord);
+$loginwachtwoord = $mysqli->real_escape_string($loginwachtwoord);
 
 //var met query die controleert of email bestaat
 $checkEmailExist = $mysqli->query("SELECT * FROM gebruiker WHERE email = '$loginemail'");

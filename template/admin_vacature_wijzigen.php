@@ -1,7 +1,4 @@
-<?php
-    include('../config.php');
-?>
-
+<!--Modal voor admin om de vacature te wijzigen-->
 <div class="modal fade" id="adminVacatureWijzigen" role="dialog">
     <div class="modal-dialog">
 

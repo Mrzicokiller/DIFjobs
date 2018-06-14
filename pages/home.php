@@ -6,6 +6,7 @@
     include("../template/header.php");
     require_once("../config.php");
 
+    //vacature tellen voor de counter
     $vacCount = $mysqli->query("SELECT * FROM vacature");
 
 

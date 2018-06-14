@@ -24,6 +24,7 @@
 
     <div class="row ml-sm-2 mr-sm-2">
         <div class="col-lg-12">
+            <!--Email invullen form-->
             <form name="passwordResetForm">
                 <div class="form-group">
                     <label for="emailInput">Vul hier je email adres in.</label>
@@ -39,13 +40,16 @@
 <script>
     function resetPassword()
     {
+        //email uit de input halen
         var email = $('#emailInput').val();
 
+        //maak een post naar de email check om te checken of de email wel bestaat
         $.post("../POST/email_check.php", {
                 email: email
             },
             function (result)
             {
+                //als de email bestaat vraag dan een nieuw wachtwoord aan.
                 if (result == 1) {
                     $.post('../POST/password_reset.php',{
                             email: email

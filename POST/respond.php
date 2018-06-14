@@ -14,7 +14,7 @@ include_once('../config.php');
 $titelNaam = $_POST['jobTitle'];
 
 //variabele waarin de tekst van een bericht wordt geplaatst
-$reactieBericht = mysqli_real_escape_string($mysqli, $_POST['Bericht']);
+$reactieBericht = $mysqli->real_escape_string($_POST['Bericht']);
 
 //query waarmee het emailadress van de plaatser wordt gevonden
 $getContactQuery = $mysqli->query("SELECT gebruiker.email FROM gebruiker JOIN vacature ON gebruiker.ID = vacature.gebruikerID WHERE vacature.titel = '$titelNaam'");

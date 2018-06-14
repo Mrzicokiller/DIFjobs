@@ -10,13 +10,17 @@ include('../config.php');
 
 $status = "";
 
+//check om welke submit het gaan
 if(isset($_POST['studentSubmit']))
 {
+    //haal alles uit de post
     $gebruikersID = $_POST['gebruikerID'];
     $specialisatie = $_POST['specialisatie'];
 
+    //zet de gegevens in de database
     if($mysqli->query('INSERT INTO student VALUES(' . $gebruikersID . ', "' . $specialisatie .'")'))
     {
+        //zet de status in de variable
         $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
     }
     else
@@ -78,7 +82,8 @@ elseif(isset($_POST['particulierSubmit']))
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 mt-sm-4 ml-sm-2 mr-sm-2">
-                <h3><?php echo $status ?></h3>
+                <!--Laat de status zien-->
+                <h3><?php echo $status; ?></h3>
                 <hr/>
             </div>
         </div>

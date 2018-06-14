@@ -8,17 +8,20 @@
 
     include('../config.php');
 
+    //haal alle gegevens uit de url
     $email = $_GET['email'];
     $code = $_GET['code'];
 
-    $result = $mysqli->query('SELECT ID FROM gebruiker WHERE Email = "' . $email . '" AND verifiedCode = "' . $code . '"');
+    //haal de gebruiker op uit de databse
+    $result = $mysqli->query("SELECT ID FROM gebruiker WHERE Email = '$email' AND verifiedCode = '$code'");
     $gebruikerID = "";
 
+    //als er resultaat is update de gebruiker en zet verified op true en haal de code uit de database
     if($result)
     {
         $gebruikerID = $result->fetch_object()->ID;
 
-        $mysqli->query('UPDATE gebruiker SET veriefied = true, verifiedCode = NULL WHERE ID = ' . $gebruikerID . ' ');
+        $mysqli->query("UPDATE gebruiker SET veriefied = true, verifiedCode = NULL WHERE ID = '$gebruikerID' ");
 
 
     }
@@ -47,7 +50,7 @@
                 <hr/>
             </div>
         </div>
-
+<!--Hier staan de verschillende forms voor de verschillende soorten accounts-->
     <div class="row ml-sm-2 mr-sm-2">
         <div class="col-lg-12">
             <div class="card card-grey">

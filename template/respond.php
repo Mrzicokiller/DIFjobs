@@ -1,3 +1,4 @@
+<!--Modal voor de reactie-->
 <div class="modal fade" id="respondPopup" role="dialog">
 	<div class="modal-dialog">
 

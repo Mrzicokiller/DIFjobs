@@ -31,6 +31,7 @@
 
 	<div class="row mx-auto">
 		<div class="col-sm-6">
+            <!--vacature uploaden form-->
 			<form name="postJobForm" id="signUpForm" action="../POST/jobpost.php" method="post">
 				<div class="form-group">
 					<label for="jobNaam">Titel</label>

@@ -15,7 +15,7 @@ session_start();
 if($_GET['type'] == 'name')
 {
 
-    $name = mysqli_real_escape_string($mysqli, $_POST['name']);
+    $name = $mysqli->real_escape_string($_POST['name']);
 
     $nameUpdate = $mysqli->query("UPDATE `gebruiker` SET `Naam`= '".$name."'WHERE ID = " . $_SESSION['ID']);
 
@@ -38,7 +38,7 @@ if($_GET['type'] == 'name')
 elseif ($_GET['type'] == 'email')
 {
 
-    $email = mysqli_real_escape_string($mysqli, $_POST['email']);
+    $email = $mysqli->real_escape_string($_POST['email']);
 
     $emailUpdate = $mysqli->query("UPDATE `gebruiker` SET `Email`= '".$email."'WHERE ID = " . $_SESSION['ID']);
 
@@ -58,10 +58,10 @@ elseif ($_GET['type'] == 'email')
 elseif ($_GET['type'] == 'password')
 {
 
-    $pass = mysqli_real_escape_string($mysqli, $_POST['pass']);
+    $pass = $mysqli->real_escape_string($_POST['pass']);
 
     $pass = password_hash($pass, PASSWORD_BCRYPT);
-    $bedrijfUrl = mysqli_real_escape_string($mysqli, $_POST['url']);
+    $bedrijfUrl = $mysqli->real_escape_string($_POST['url']);
 
     $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $_SESSION['ID']);
 
@@ -80,7 +80,7 @@ elseif ($_GET['type'] == 'password')
 elseif ($_GET['type'] == 'skill')
 {
 
-    $skill = mysqli_real_escape_string($mysqli, $_POST['skill']);
+    $skill = $mysqli->real_escape_string($mysqli, $_POST['skill']);
 
     $skillUpdate = $mysqli->query("UPDATE `Student` SET `Specialisatie`= '".$skill."'WHERE ID = " . $_SESSION['ID']);
 
@@ -89,8 +89,8 @@ elseif ($_GET['type'] == 'skill')
 
 elseif ($_GET['type'] == 'bedrijf')
 {
-    $bedrijfNaam = mysqli_real_escape_string($mysqli, $_POST['name']);
-    $bedrijfTel = mysqli_real_escape_string($mysqli, $_POST['tel']);
+    $bedrijfNaam = $mysqli->real_escape_string($_POST['name']);
+    $bedrijfTel = $mysqli->real_escape_string($_POST['tel']);
 
 
     $bedrijfUpdate = $mysqli->query("UPDATE `bedrijf` SET `naamBedrijf`= '".$bedrijfNaam."',
@@ -102,7 +102,7 @@ elseif ($_GET['type'] == 'bedrijf')
 
 elseif ($_GET['type'] == 'particulier')
 {
-    $particulierTel = mysqli_real_escape_string($mysqli, $_POST['tel']);
+    $particulierTel = $mysqli->real_escape_string($_POST['tel']);
 
 
     $particulierUpdate = $mysqli->query("UPDATE `particulier` SET `tel_nummer`= '".$particulierTel."' WHERE ID = ".$_SESSION['ID']);

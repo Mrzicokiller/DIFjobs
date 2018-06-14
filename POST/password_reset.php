@@ -9,10 +9,12 @@
 include_once('../config.php');
 include_once ('../assets/php/code_generator.php');
 
+//check of er een get aanwezig is
 if(!isset($_GET['email']))
 {
+    //haal alle gegevens uit de post
     $email = $_POST['email'];
-    $email = mysqli_real_escape_string($mysqli, $email);
+    $email = $mysqli->real_escape_string($email);
 
 
     $verifiedCode = code_generator(10);
@@ -35,6 +37,7 @@ if(!isset($_GET['email']))
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= 'From: <briefjesboord@test.nl>' . "\r\n";
 
+    //check of het een email is
     if(filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         if($mysqli->query("UPDATE gebruiker SET verifiedCode = '$verifiedCode' WHERE email = '$email'"))
@@ -109,6 +112,7 @@ else
         }
         else
         {
+            //maak een post naar de verwerkpagina
             $.post("../POST/updateUserData.php?type=password", {
                     pass: $("#passwordReset").val()
                 },

@@ -8,8 +8,10 @@
     session_start();
     include('../config.php');
 
+    //check of er een label wordt gemaakt
     if($_POST['type'] == 'newLabel')
     {
+        //maak de nieuwe label
         $trefwoord = $_POST['trefwoord'];
         $mysqli->query("INSERT INTO v_label VALUES(NULL,'$trefwoord')");
         echo 1;

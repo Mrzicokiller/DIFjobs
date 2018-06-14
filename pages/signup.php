@@ -20,6 +20,7 @@
         </nav>
     <div class="row mx-auto">
         <div class="col-sm-6">
+            <!--Registratie form-->
             <form name="signupForm" id="signUpForm" action="../POST/signup.php" method="post">
                 <div class="form-group">
                     <label for="naam">Naam</label>

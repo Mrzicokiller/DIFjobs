@@ -61,6 +61,7 @@ if (isset($_SESSION['ID'])) {
         <div class="row mt-lg-2">
             <div class="col-lg-6">
 
+                <!--edit job form-->
                 <form name="editjob" action="../POST/editjob.php" method="post">
                     <div class="form-group col-lg-6">
                         <label for="job">Functie:</label>
