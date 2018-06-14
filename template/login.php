@@ -22,6 +22,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
+                Wachtwoord vergeten? <a class="btn btn-link" href="../pages/wachtwoord_reset.php">Klik dan hier.</a>
 			</div>
 		</div>
 	</div>

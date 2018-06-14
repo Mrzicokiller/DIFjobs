@@ -52,6 +52,15 @@ elseif ($_GET['type'] == 'password')
 
     $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $_SESSION['ID']);
 
+    if($passUpdate->num_rows > 0)
+    {
+        echo 0;
+    }
+    else
+    {
+        echo 1;
+    }
+
     $mysqli->close();
 }
 

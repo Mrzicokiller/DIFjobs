@@ -62,12 +62,10 @@ session_start();
 
 
     <?php
-    $haalJobQuery = "SELECT * FROM vacature";
-    $haalJobs = mysqli_query($mysqli, $haalJobQuery);
-    $counter = 1;
+    $haalJobs = $mysqli->query("SELECT * FROM vacature");
 
-
-    while ($rij = mysqli_fetch_assoc($haalJobs)) {  ?>
+if($haalJobs){
+    while ($rij = $haalJobs->fetch_array()) {  ?>
 
 		<div class="card mt-2 mr-2 mb-2 ml-2" style="width:30vw; float:left;">
 			<div class="card-body">
@@ -77,7 +75,7 @@ session_start();
 			</div>
 		</div>
 
-    <?php } ?>
+    <?php }} ?>
 
 </div>
 </body>
