@@ -283,10 +283,14 @@ if (isset($_SESSION['ID'])) {
                                 </thead>
                                 <tbody>
                                 <?php
+
+                                //query om vacatures op te halen
                                 $vacatureQuery = $mysqli->query("SELECT `Titel`, `Datum`, `Functie` 
                                                                     FROM vacature WHERE gebruikerID = " . $_SESSION['ID']);
-
+                                //while loop om vactures op het scherm te zetten
                                 while ($rij = $vacatureQuery->fetch_array()) {
+
+                                    //datum formateren
                                     $date = date_format(new DateTime($rij['Datum']), "d-m-Y");
                                     $dateURL = date_format(new DateTime($rij['Datum']), "d-m-Y_h:i:s");
                                     ?>
@@ -331,11 +335,12 @@ if (isset($_SESSION['ID'])) {
                                 <tbody>
 
                                 <?php
+                                //maak query om reacties op te halen
                                 $reactieQuery = $mysqli->query("SELECT v.Titel, v.Functie, g.Naam, r.datum FROM reactie r
                                                                 JOIN gebruiker g ON r.VgebruikerID = g.ID
                                                                 JOIN vacature v ON (r.Vtitel = v.Titel AND r.Vdatum = v.Datum AND r.VgebruikerID = v.gebruikerID)
                                                                 WHERE r.SgebruikerID = " . $_SESSION['ID']);
-
+                                //while loop om reacties op het scherm te zetten
                                 while ($rij = $reactieQuery->fetch_array()) {
                                     ?>
                                     <tr>

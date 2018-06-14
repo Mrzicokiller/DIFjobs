@@ -61,6 +61,7 @@ elseif ($_GET['type'] == 'password')
     $pass = mysqli_real_escape_string($mysqli, $_POST['pass']);
 
     $pass = password_hash($pass, PASSWORD_BCRYPT);
+    $bedrijfUrl = mysqli_real_escape_string($mysqli, $_POST['url']);
 
     $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $_SESSION['ID']);
 
@@ -80,7 +81,6 @@ elseif ($_GET['type'] == 'skill')
 elseif ($_GET['type'] == 'bedrijf')
 {
     $bedrijfNaam = mysqli_real_escape_string($mysqli, $_POST['name']);
-    $bedrijfUrl = mysqli_real_escape_string($mysqli, $_POST['url']);
     $bedrijfTel = mysqli_real_escape_string($mysqli, $_POST['tel']);
 
 
