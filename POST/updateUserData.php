@@ -23,14 +23,17 @@ if($_GET['type'] == 'name')
 
     if($nameUpdate->num_rows == 1)
     {
+        $mysqli->close();
+
         return true;
     }
     else
     {
+        $mysqli->close();
+
         return false;
     }
 
-    $mysqli->close();
 }
 elseif ($_GET['type'] == 'email')
 {

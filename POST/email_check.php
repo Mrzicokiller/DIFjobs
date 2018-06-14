@@ -27,4 +27,8 @@
         $mysqli->close();
 
     }
+    else
+    {
+        echo 1;
+    }
 ?>

@@ -153,7 +153,8 @@ if (isset($_SESSION['ID'])) {
                                 </button>
                             </div>
                         </div>
-                        <small class="redLetters" id="emailError">Dit email adres is al in gebruik.</small>
+                        <small class="redLetters" id="emailError">Dit email adres is niet geldig of al in gebruik.
+                        </small>
                         <!-- einde email veranderen -->
                         <hr/>
 
@@ -244,7 +245,8 @@ if (isset($_SESSION['ID'])) {
                             <div class="row">
                                 <div class="form-group col-lg-2">
                                     <label for="phoneNumber">Telefoonnummer:</label>
-                                    <input type="url" class="form-control" id="particulierPhone" value="<?php echo $particulierTel; ?>" placeholder="0612345678">
+                                    <input type="url" class="form-control" id="particulierPhone"
+                                           value="<?php echo $particulierTel; ?>" placeholder="0612345678">
                                 </div>
 
                                 <div class="col-sm-3 mt-2 pt-sm-4">
@@ -260,8 +262,15 @@ if (isset($_SESSION['ID'])) {
                         <div class="card-body" id="jobsBody" hidden>
 
                             <!-- bedrijf & particulier-->
-                            <h1 class="card-title">Vacature</h1>
-
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h1 class="card-title">Vacature</h1>
+                                </div>
+                                <div class="col-lg-9">
+                                    <a href="jobpost.php" class="pull-right btn btn-primary">Plaats vacature
+                                    </a>
+                                </div>
+                            </div>
                             <table class="table table-striped table-dark">
                                 <thead>
                                 <tr>
@@ -269,6 +278,7 @@ if (isset($_SESSION['ID'])) {
                                     <th scope="col">Datum</th>
                                     <th scope="col">Functie</th>
                                     <th scope="col">aanpassen</th>
+                                    <th scope="col">reacties</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -282,12 +292,17 @@ if (isset($_SESSION['ID'])) {
                                     ?>
 
 
-                                        <tr>
-                                            <th><?php echo $rij['Titel']; ?></th>
-                                            <td><?php echo $date; ?></td>
-                                            <td><?php echo $rij['Functie']; ?></td>
-                                            <td><a href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span class="fa fa-edit"></span></a></td>
-                                        </tr>
+                                    <tr>
+                                        <th><?php echo $rij['Titel']; ?></th>
+                                        <td><?php echo $date; ?></td>
+                                        <td><?php echo $rij['Functie']; ?></td>
+                                        <td>
+                                            <a href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
+                                                        class="fa fa-edit"></span></a></td>
+                                        <td>
+                                            <a href="jobrespond.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
+                                                        class="fa fa-comment"></span></a></td>
+                                    </tr>
 
                                     <?php
                                 }
@@ -319,19 +334,19 @@ if (isset($_SESSION['ID'])) {
                                 $reactieQuery = $mysqli->query("SELECT v.Titel, v.Functie, g.Naam, r.datum FROM reactie r
                                                                 JOIN gebruiker g ON r.VgebruikerID = g.ID
                                                                 JOIN vacature v ON (r.Vtitel = v.Titel AND r.Vdatum = v.Datum AND r.VgebruikerID = v.gebruikerID)
-                                                                WHERE r.SgebruikerID = ". $_SESSION['ID']);
+                                                                WHERE r.SgebruikerID = " . $_SESSION['ID']);
 
                                 while ($rij = $reactieQuery->fetch_array()) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $rij['Titel'] ?></td>
+                                        <td><?php echo $rij['Functie'] ?></td>
+                                        <td><?php echo $rij['Naam'] ?></td>
+                                        <td><?php echo $rij['datum'] ?></td>
+                                    </tr>
+                                <?php }
+                                $mysqli->close();
                                 ?>
-                                <tr>
-                                    <td><?php echo $rij['Titel']?></td>
-                                    <td><?php echo $rij['Functie']?></td>
-                                    <td><?php echo $rij['Naam']?></td>
-                                    <td><?php echo $rij['datum']?></td>
-                                </tr>
-                               <?php }
-                               $mysqli->close();
-                               ?>
                                 </tbody>
                             </table>
                         </div>
@@ -368,6 +383,8 @@ if (isset($_SESSION['ID'])) {
                         $("#emailError").show();
                     }
                     else {
+                        $("#emailError").hide();
+
                         //update het email adres
                         $.post("../POST/updateUserData.php?type=email", {
                             email: $("#email").val()
