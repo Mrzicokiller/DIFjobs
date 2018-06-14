@@ -26,7 +26,7 @@
         <div class="col-lg-12">
             <form name="passwordResetForm" onsubmit="resetPassword();">
                 <label for="emailInput">Vul hier je email adres in.</label>
-                <input id="emailInput" type="email" class="form-control">
+                <input id="emailInput" type="email" class="form-control" required>
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
             <h3 id="reactie"></h3>

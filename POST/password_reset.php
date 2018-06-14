@@ -77,9 +77,19 @@ else
 
     <div class="row ml-sm-2 mr-sm-2">
         <div class="col-lg-12">
-            <form name="passwordResetForm" onsubmit="resetPassword();">
-                <label for="emailInput">Vul hier je email adres in.</label>
-                <input id="emailInput" type="email" class="form-control">
+            <h3 id="errorReset" class="redLetters" hidden>Er is iets fout gegaan. Neem contact op met de beheerder.</h3>
+            <h3 id="succesReset" class="greenLetters" hidden>Het is gelukt om je wachtwoord te veranderen.</h3>
+            <form name="newPasswordForm" onsubmit="resetPassword();">
+                <div class="form-group">
+                    <label for="passwordReset">Vul hier je nieuwe wachtwoord adres in.</label>
+                    <input id="passwordReset" type="password" class="form-control" placeholder="Wachtwoord" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordReset2">Herhaal Wachtwoord</label>
+                    <input type="password" class="form-control" id="passwordReset2" placeholder="Wachtwoord" required>
+                    <small id="passwordError" class="redLetters">Het wachtwoord is niet hetzelfde.</small>
+                </div>
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
             <h3 id="reactie"></h3>
@@ -87,7 +97,33 @@ else
     </div>
 
 </div>
+<script>
 
+    function resetPassword()
+    {
+        //wachtwoorden vergelijken
+        if ($("#passwordReset").val() !== $("#passwordReset2").val())
+        {
+            $("#passwordError").show();
+        }
+        else
+        {
+            $.post("../POST/updateUserData.php?type=password", {
+                    pass: $("#passwordReset").val()
+                },
+                function (result) {
+                    if (result == 1) {
+                        $('#succesReset').show();
+                    }
+                    else {
+
+                        $('#errorReset').show();
+                    }
+
+                });
+        }
+    }
+</script>
 </body>
 </html>
 
