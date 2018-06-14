@@ -39,15 +39,15 @@ if ($checkEmailExist) {
 
     if(password_verify($loginwachtwoord, $checkPassword)) {
 
-        if($mysqli->query("SELECT ID FROM student WHERE ID = $ID"))
+        if($mysqli->query("SELECT ID FROM student WHERE ID = $ID")->num_rows > 0)
         {
             $type = 'student';
         }
-        elseif($mysqli->query("SELECT ID FROM bedrijf WHERE ID = $ID"))
+        elseif($mysqli->query("SELECT ID FROM bedrijf WHERE ID = $ID")->num_rows > 0)
         {
             $type = 'bedrijf';
         }
-        elseif($mysqli->query("SELECT ID FROM particulier WHERE ID = $ID"))
+        elseif($mysqli->query("SELECT ID FROM particulier WHERE ID = $ID")->num_rows > 0)
         {
             $type = 'particulier';
         }
