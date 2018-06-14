@@ -55,7 +55,7 @@ elseif(isset($_POST['particulierSubmit']))
 
     if($mysqli->query('INSERT INTO particulier VALUES(' . $gebruikersID . ', "' . $particulierTel .'")'))
     {
-        $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of student aan je account toevoegen dan kan dat via de account pagina";
+        $status = "Je bent geregistreerd als particulier. Wil je later ook een bedrijf of student aan je account toevoegen dan kan dat via de account pagina";
     }
     else
     {
