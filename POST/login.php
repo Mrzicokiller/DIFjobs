@@ -35,13 +35,29 @@ if ($checkEmailExist) {
         $admin = $rij['Is_admin'];
     }
 
+
+
     if(password_verify($loginwachtwoord, $checkPassword)) {
+
+        if($mysqli->query("SELECT ID FROM student WHERE ID = $ID"))
+        {
+            $type = 'student';
+        }
+        elseif($mysqli->query("SELECT ID FROM bedrijf WHERE ID = $ID"))
+        {
+            $type = 'bedrijf';
+        }
+        elseif($mysqli->query("SELECT ID FROM particulier WHERE ID = $ID"))
+        {
+            $type = 'particulier';
+        }
         session_start();
 
         $_SESSION["email"] = $loginemail;
         $_SESSION["ID"] = $ID;
         $_SESSION["name"] = $name;
         $_SESSION["admin"] = $admin;
+        $_SESSION['accountType'] = $type;
 
         header("location: ../pages/home.php");
     } else {

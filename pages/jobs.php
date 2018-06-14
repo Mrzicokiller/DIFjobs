@@ -12,7 +12,7 @@ session_start();
 
     include_once('../config.php');
 
-    if (isset($_SESSION['ID'])) {
+    if (isset($_SESSION['ID']) && $_SESSION['type'] == 'student') {
     include ('../template/respond.php');
 	}
 
