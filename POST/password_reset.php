@@ -39,7 +39,8 @@ if(!isset($_GET['email']))
     {
         if($mysqli->query("UPDATE gebruiker SET verifiedCode = '$verifiedCode' WHERE email = '$email'"))
         {
-            echo "Er is een email gestuurd met een link";
+            echo 'Er is een email gestuurd met een link <a href="../POST/password_reset.php?email=' . $email . '&code=' . $verifiedCode . '">Email verifiëren</a> ';
+
         }
         else
         {
@@ -77,9 +78,9 @@ else
 
     <div class="row ml-sm-2 mr-sm-2">
         <div class="col-lg-12">
-            <h3 id="errorReset" class="redLetters" hidden>Er is iets fout gegaan. Neem contact op met de beheerder.</h3>
-            <h3 id="succesReset" class="greenLetters" hidden>Het is gelukt om je wachtwoord te veranderen.</h3>
-            <form name="newPasswordForm" onsubmit="resetPassword();">
+            <h3 id="errorReset" class="redLetters" hidden="true">Er is iets fout gegaan. Neem contact op met de beheerder.</h3>
+            <h3 id="succesReset" class="greenLetters" hidden="true">Het is gelukt om je wachtwoord te veranderen.</h3>
+            <form name="newPasswordForm">
                 <div class="form-group">
                     <label for="passwordReset">Vul hier je nieuwe wachtwoord adres in.</label>
                     <input id="passwordReset" type="password" class="form-control" placeholder="Wachtwoord" required>
@@ -88,9 +89,9 @@ else
                 <div class="form-group">
                     <label for="passwordReset2">Herhaal Wachtwoord</label>
                     <input type="password" class="form-control" id="passwordReset2" placeholder="Wachtwoord" required>
-                    <small id="passwordError" class="redLetters">Het wachtwoord is niet hetzelfde.</small>
+                    <small id="passwordError" hidden="true" class="redLetters">Het wachtwoord is niet hetzelfde.</small>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-primary" type="button" onclick="resetPassword();">Submit</button>
             </form>
             <h3 id="reactie"></h3>
         </div>

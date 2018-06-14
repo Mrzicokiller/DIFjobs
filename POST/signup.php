@@ -103,6 +103,7 @@ else
                 {
                     ?>
                     <h3>Er is een email gestuurd waar je je email moet bevestiggen.</h3>
+                    <a href="email_veriefied.php?email=<?php echo $email; ?>&code=<?php echo $verifiedCode; ?>">Email verifiëren</a>
                     <?php
                 }
             ?>

@@ -24,10 +24,12 @@
 
     <div class="row ml-sm-2 mr-sm-2">
         <div class="col-lg-12">
-            <form name="passwordResetForm" onsubmit="resetPassword();">
-                <label for="emailInput">Vul hier je email adres in.</label>
-                <input id="emailInput" type="email" class="form-control" required>
-                <button class="btn btn-primary" type="submit">Submit</button>
+            <form name="passwordResetForm">
+                <div class="form-group">
+                    <label for="emailInput">Vul hier je email adres in.</label>
+                    <input id="emailInput" type="email" class="form-control" required>
+                </div>
+                <button class="btn btn-primary" onclick="resetPassword();" type="button">Submit</button>
             </form>
             <h3 id="reactie"></h3>
         </div>
@@ -40,20 +42,21 @@
         var email = $('#emailInput').val();
 
         $.post("../POST/email_check.php", {
-                email: $("#email").val()
+                email: email
             },
             function (result)
             {
                 if (result == 1) {
-                    $('#reactie').val('Deze email bestaat niet in onze database.');
-                }
-                else {
-                    $.post('../POST/password_reset',{
+                    $.post('../POST/password_reset.php',{
                             email: email
                         },
                         function (result2) {
-                            $('#reactie').val(result2);
+                            $('#reactie').html(result2);
                         });
+
+                }
+                else {
+                    $('#reactie').html('Deze email bestaat niet in onze database.');
                 }
 
             });
