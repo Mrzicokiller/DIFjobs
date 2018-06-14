@@ -26,7 +26,11 @@ include("login.php");
             <li class="nav-item">
                 <a class="nav-link navigation-link" href="../pages/account.php">Account</a>
             </li>
-
+            <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){?>
+                <li class="nav-item">
+                    <a class="nav-link navigation-link" href="../pages/admin_home.php">Admin Panel</a>
+                </li>
+            <?php } ?>
         </ul>
 
         <ul class="navbar-nav my-2 my-lg-0">
