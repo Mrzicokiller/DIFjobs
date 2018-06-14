@@ -3,7 +3,12 @@
 <head>
     <?php
     session_start();
-    include("../template/header.php")
+    include("../template/header.php");
+    require_once("../config.php");
+
+    $vacCount = $mysqli->query("SELECT * FROM vacature");
+
+
     ?>
 </head>
 
@@ -32,7 +37,7 @@
                         </div>
                         <div class="col-sm-9 text-right">
                             <div class="huge">
-                                5
+                                <?php echo $vacCount->num_rows; ?>
                             </div>
                             <div>
                                 Vacatures!

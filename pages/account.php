@@ -40,15 +40,9 @@ if (isset($_SESSION['ID'])) {
         $bedrijfsgegevens = $bedrijfGegevensQuery->fetch_array();
 
 
-        $bedrijfsnaam;
-        $bedrijfURL;
-        $bedrijfTel;
-
-        while ($rij = $bedrijfsgegevens) {
-            $bedrijfsnaam = $rij['naamBedrijf'];
-            $bedrijfURL = $rij['webstieUrl'];
-            $bedrijfTel = $rij['tel_nummer'];
-        }
+        $bedrijfsnaam = $bedrijfsgegevens['naamBedrijf'];
+        $bedrijfURL = $bedrijfsgegevens['websiteUrl'];
+        $bedrijfTel = $bedrijfsgegevens['tel_nummer'];
     }
 
     //check of het een particulier is
@@ -73,7 +67,6 @@ if (isset($_SESSION['ID'])) {
 
     }
 
-    $mysqli->close();
 
     ?>
     <html>
@@ -134,119 +127,133 @@ if (isset($_SESSION['ID'])) {
                         <h1 class="card-title">Gegevens</h1>
 
                         <h3>persoonlijke gegevens:</h3>
-                        <form name="changeName">
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="naam">Naam:</label>
-                                    <input type="text" class="form-control" id="naam" placeholder="John Doe"
-                                           value="<?php echo $_SESSION['name']; ?>" required>
-                                </div>
-                                <div class="col-lg-2 mt-2 pt-sm-4">
-                                    <button onclick="nameSubmit()" class="btn btn-primary">Opslaan</button>
-                                </div>
+                        <!-- naam veranderen -->
+                        <div class="row">
+                            <div class="form-group col-lg-3">
+                                <label for="naam">Naam:</label>
+                                <input type="text" class="form-control" id="naam" placeholder="John Doe"
+                                       value="<?php echo $_SESSION['name']; ?>" required>
                             </div>
-                        </form>
-                        <form name="changeEmail">
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email"
-                                           value="<?php echo $_SESSION['email']; ?>"
-                                           required>
-                                </div>
-                                <div class="col-lg-2 mt-2 pt-sm-4">
-                                    <button onclick="emailSubmit()" class="btn btn-primary">Opslaan
-                                    </button>
-                                </div>
+                            <div class="col-lg-2 mt-2 pt-sm-4">
+                                <button onclick="nameSubmit();" class="btn btn-primary">Opslaan</button>
                             </div>
-                            <small class="redLetters" id="emailError">Dit email adres is al in gebruik.</small>
-                        </form>
+                        </div>
+                        <!-- einde naam veranderen-->
+
+                        <!-- email veranderen -->
+                        <div class="row">
+                            <div class="form-group col-lg-3">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email"
+                                       value="<?php echo $_SESSION['email']; ?>"
+                                       required>
+                            </div>
+                            <div class="col-lg-2 mt-2 pt-sm-4">
+                                <button onclick="emailSubmit();" class="btn btn-primary">Opslaan
+                                </button>
+                            </div>
+                        </div>
+                        <small class="redLetters" id="emailError">Dit email adres is niet geldig of al in gebruik.
+                        </small>
+                        <!-- einde email veranderen -->
                         <hr/>
 
                         <h3>wachtwoord veranderen:</h3>
-                        <form name="changePassword">
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="password">Nieuw Wachtwoord*</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Wachtwoord"
-                                           required>
-                                </div>
+                        <!-- wachtwoord veranderen -->
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label for="password">Nieuw Wachtwoord*</label>
+                                <input type="password" class="form-control" id="password" placeholder="Wachtwoord"
+                                       required>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-lg-2">
-                                    <label for="confirmPassword">Herhaal Wachtwoord*</label>
-                                    <input type="password" class="form-control" id="confirmPassword"
-                                           placeholder="Wachtwoord" required>
-                                </div>
-                                <div class="col-sm-3 mt-2 pt-sm-4">
-                                    <button onclick="passwordSubmit()" class="btn btn-primary">Opslaan
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-2">
+                                <label for="confirmPassword">Herhaal Wachtwoord*</label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                       placeholder="Wachtwoord" required>
                             </div>
-                            <small id="passwordError" class="redLetters">Het wachtwoord is niet het zelfde.</small>
-                        </form>
+                            <div class="col-sm-3 mt-2 pt-sm-4">
+                                <button onclick="passwordSubmit()" class="btn btn-primary">Opslaan
+                                </button>
+                            </div>
+                        </div>
+                        <small id="passwordError" class="redLetters">Het wachtwoord is niet het zelfde.</small>
+                        <!-- einde wachtwoord veranderen -->
+                        <hr/>
 
                         <?php if ($is_student) { ?>
-                            <!-- forms als gebruiker student is -->
+                            <!-- student -->
                             <h3>Specialisatie:</h3>
-                            <form name="specialisatie">
-                                <div class="row">
-                                    <div class="form-group col-lg-2">
-                                        <input type="text" class="form-control" id="specialisatie"
-                                               value="<?php echo $specialisatie; ?>"
-                                               placeholder="C# developer">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button onclick="skillSubmit()" class="btn btn-primary">Opslaan</button>
-                                    </div>
+                            <div class="row">
+                                <div class="form-group col-lg-2">
+                                    <input type="text" class="form-control" id="specialisatie"
+                                           value="<?php echo $specialisatie; ?>"
+                                           placeholder="C# developer">
                                 </div>
-
-
-                            </form>
-
+                                <div class="col-sm-3">
+                                    <button onclick="skillSubmit()" class="btn btn-primary">Opslaan</button>
+                                </div>
+                            </div>
+                            <!-- einde student -->
+                            <hr/>
                         <?php }
 
                         if ($is_bedrijf) {
                             ?>
 
-                            <!-- form als gebruiker bedrijf is -->
+                            <!-- bedrijf -->
                             <h3>Bedrijfsgegevens:</h3>
-                            <form name="bedrijfsgegevens" action="../POST/updateUserData.php?T=bedrijf" method="post">
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
                                     <label for="Bedrijfsnaam">Bedrijfsnaam:</label>
                                     <input type="text" class="form-control" id="Bedrijfsnaam"
-                                           placeholder="Dif jobs developer">
+                                           placeholder="Dif jobs developer" value="<?php echo $bedrijfsnaam; ?>">
                                 </div>
+                            </div>
 
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
                                     <label for="webURL">Website:</label>
-                                    <input type="url" class="form-control" id="webURL" placeholder="www.difjobs.nl">
+                                    <input type="url" class="form-control" id="webURL"
+                                           value="<?php echo $bedrijfURL; ?>" placeholder="www.difjobs.nl">
                                 </div>
+                            </div>
 
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-3">
                                     <label for="phoneNumber">Telefoonnummer:</label>
-                                    <input type="url" class="form-control" id="phoneNumber" placeholder="0612345678">
+                                    <input type="url" class="form-control" id="phoneNumber"
+                                           value="<?php echo $bedrijfTel; ?>" placeholder="0612345678">
                                 </div>
+                            </div>
 
-                                <br/>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                            <br/>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <button onclick="bedrijfSubmit();" class="btn btn-primary">Opslaan</button>
+                                </div>
+                            </div>
+                            <!-- einde bedrijf -->
+                            <hr/>
 
                         <?php }
                         if ($is_particulier) {
                             ?>
-                            <!-- form als gebruiker particulier is -->
+                            <!-- particulier -->
                             <h3>Telefoonnummer:</h3>
-                            <form name="telefoonnummer" action="../POST/updateUserData.php?T=particulier" method="post">
-
-                                <div class="form-group">
+                            <div class="row">
+                                <div class="form-group col-lg-2">
                                     <label for="phoneNumber">Telefoonnummer:</label>
-                                    <input type="url" class="form-control" id="phoneNumber" placeholder="0612345678">
+                                    <input type="url" class="form-control" id="particulierPhone"
+                                           value="<?php echo $particulierTel; ?>" placeholder="0612345678">
                                 </div>
 
-                                <br/>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                                <div class="col-sm-3 mt-2 pt-sm-4">
+                                    <button onclick="particulierSubmit();" class="btn btn-primary">Opslaan</button>
+                                </div>
+                            </div>                            <!-- einde particulier -->
+
                         <?php } ?>
 
                     </div>
@@ -254,37 +261,57 @@ if (isset($_SESSION['ID'])) {
                     <?php if ($is_bedrijf || $is_particulier) { ?>
                         <div class="card-body" id="jobsBody" hidden>
 
-                            <!-- alleen bedrijf-->
-                            <h1 class="card-title">Vacature</h1>
-
+                            <!-- bedrijf & particulier-->
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h1 class="card-title">Vacature</h1>
+                                </div>
+                                <div class="col-lg-9">
+                                    <a href="jobpost.php" class="pull-right btn btn-primary">Plaats vacature
+                                    </a>
+                                </div>
+                            </div>
                             <table class="table table-striped table-dark">
                                 <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Titel</th>
                                     <th scope="col">Datum</th>
                                     <th scope="col">Functie</th>
+                                    <th scope="col">aanpassen</th>
+                                    <th scope="col">reacties</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
+                                <?php
+
+                                //query om vacatures op te halen
+                                $vacatureQuery = $mysqli->query("SELECT `Titel`, `Datum`, `Functie` 
+                                                                    FROM vacature WHERE gebruikerID = " . $_SESSION['ID']);
+                                //while loop om vactures op het scherm te zetten
+                                while ($rij = $vacatureQuery->fetch_array()) {
+
+                                    //datum formateren
+                                    $date = date_format(new DateTime($rij['Datum']), "d-m-Y");
+                                    $dateURL = date_format(new DateTime($rij['Datum']), "d-m-Y_h:i:s");
+                                    ?>
+
+
+                                    <tr>
+                                        <th><?php echo $rij['Titel']; ?></th>
+                                        <td><?php echo $date; ?></td>
+                                        <td><?php echo $rij['Functie']; ?></td>
+                                        <td>
+                                            <a href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
+                                                        class="fa fa-edit"></span></a></td>
+                                        <td>
+                                            <a href="jobrespond.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
+                                                        class="fa fa-comment"></span></a></td>
+                                    </tr>
+
+                                    <?php
+                                }
+                                ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -299,31 +326,32 @@ if (isset($_SESSION['ID'])) {
                             <table class="table table-striped table-dark">
                                 <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
                                     <th scope="col">Titel</th>
-                                    <th scope="col">Datum</th>
                                     <th scope="col">Functie</th>
+                                    <th scope="col">Naam</th>
+                                    <th scope="col">Datum</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>php man</td>
-                                    <td>12-01-2017</td>
-                                    <td>php</td>
-                                </tr>
+
+                                <?php
+                                //maak query om reacties op te halen
+                                $reactieQuery = $mysqli->query("SELECT v.Titel, v.Functie, g.Naam, r.datum FROM reactie r
+                                                                JOIN gebruiker g ON r.VgebruikerID = g.ID
+                                                                JOIN vacature v ON (r.Vtitel = v.Titel AND r.Vdatum = v.Datum AND r.VgebruikerID = v.gebruikerID)
+                                                                WHERE r.SgebruikerID = " . $_SESSION['ID']);
+                                //while loop om reacties op het scherm te zetten
+                                while ($rij = $reactieQuery->fetch_array()) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $rij['Titel'] ?></td>
+                                        <td><?php echo $rij['Functie'] ?></td>
+                                        <td><?php echo $rij['Naam'] ?></td>
+                                        <td><?php echo $rij['datum'] ?></td>
+                                    </tr>
+                                <?php }
+                                $mysqli->close();
+                                ?>
                                 </tbody>
                             </table>
                         </div>
@@ -339,7 +367,7 @@ if (isset($_SESSION['ID'])) {
             $("#emailError").hide();
         });
 
-        //als de sumbit knop van naam veranderen wordt geklikt
+        //als de nameSumbit knop van naam veranderen wordt geklikt
         function nameSubmit() {
             //update naar database met ajax
             $.post("../POST/updateUserData.php?type=name", {
@@ -347,6 +375,7 @@ if (isset($_SESSION['ID'])) {
             });
         }
 
+        //als de emailSumbit knop van email veranderen wordt geklikt
         function emailSubmit() {
 
             //check of het email adres al bestaat
@@ -355,12 +384,13 @@ if (isset($_SESSION['ID'])) {
                 },
                 function (result) {
                     if (result == 1) {
+                        //laat emailError verschijnen
                         $("#emailError").show();
-                        console.log("nee");
                     }
                     else {
-                        console.log("ja");
-                        console.log($("#email").val());
+                        $("#emailError").hide();
+
+                        //update het email adres
                         $.post("../POST/updateUserData.php?type=email", {
                             email: $("#email").val()
                         });
@@ -368,33 +398,41 @@ if (isset($_SESSION['ID'])) {
                 });
         }
 
+        //als de passwordSumbit knop van wachtwoord veranderen wordt geklikt
         function passwordSubmit() {
             //wachtwoorden vergelijken
             if ($("#password").val() !== $("#confirmPassword").val()) {
                 $("#passwordError").show();
             }
             else {
+                //update wachtwoord met ajax
                 $.post("../POST/updateUserData.php?type=password", {
-                        pass: $("#password").val()
-                    },
-                    function (result) {
-                        if (result == 1) {
-                            return true
-                        }
-                        else {
-                            return false;
-
-                        }
-
-                    });
+                    pass: $("#password").val()
+                });
             }
 
         }
 
+        //als de skillSumbit knop van specialisatie veranderen wordt geklikt
         function skillSubmit() {
-            //update naar database met ajax
+            //update specialisatie naar database met ajax
             $.post("../POST/updateUserData.php?type=skill", {
                 skill: $("#specialisatie").val()
+            });
+        }
+
+        function bedrijfSubmit() {
+            //update specialisatie naar database met ajax
+            $.post("../POST/updateUserData.php?type=bedrijf", {
+                name: $("#Bedrijfsnaam").val(),
+                url: $("#webURL").val(),
+                tel: $("#phoneNumber").val()
+            });
+        }
+
+        function particulierSubmit() {
+            $.post("../POST/updateUserData.php?type=particulier", {
+                tel: $("#particulierPhone").val()
             });
         }
 
@@ -418,12 +456,16 @@ if (isset($_SESSION['ID'])) {
         });
 
         $('#jobsTab').click(function () {
+
+            //verander classes
             $('#jobsTab').addClass('active');
             $('#responseTab').removeClass('active');
             $('#dataTab').removeClass('active');
 
+            //laat de body zien van de geklikte tab
             $('#jobsBody').removeAttr('hidden');
 
+            //als 1 van de ander body's nog niet hidden is, maak ze dan hidden
             if (!$('#dataBody').attr('hidden') || !$('#responseBody').attr('hidden')) {
                 $('#responseBody').attr('hidden', true);
                 $('#dataBody').attr('hidden', true);
@@ -431,12 +473,15 @@ if (isset($_SESSION['ID'])) {
         });
 
         $('#responseTab').click(function () {
+            //verander classes
             $('#responseTab').addClass('active');
             $('#jobsTab').removeClass('active');
             $('#dataTab').removeClass('active');
 
+            //laat de body zien van de geklikte tab
             $('#responseBody').removeAttr('hidden');
 
+            //als 1 van de ander body's nog niet hidden is, maak ze dan hidden
             if (!$('#dataBody').attr('hidden') || !$('#jobsBody').attr('hidden')) {
                 $('#jobsBody').attr('hidden', true);
                 $('#dataBody').attr('hidden', true);
