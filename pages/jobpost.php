@@ -35,13 +35,18 @@
 			<form name="postJobForm" id="signUpForm" action="../POST/jobpost.php" method="post">
 				<div class="form-group">
 					<label for="jobNaam">Titel</label>
-					<input type="text" name="jobNaam" class="form-control" id="jobNaam" placeholder="B.V. PHP-wizzard" required>
+					<input type="text" name="jobNaam" class="form-control" id="jobNaam" placeholder="B.V. Programmeur gezocht" required>
 				</div>
 
 				<div class="form-group">
 					<label for="locatie">Locatie</label>
 					<input type="text" name="locatie" class="form-control" id="locatie" placeholder="B.V. Zoetermeer" required>
 				</div>
+
+                <div class="form-group">
+                    <label for="functie">Functie</label>
+                    <input type="text" name="functie" class="form-control" id="functie" placeholder="B.V. Webdeveloper" required>
+                </div>
 
 				<div class="form-group">
 					<label for="Omschrijving">Omschrijving</label>

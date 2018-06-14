@@ -15,6 +15,9 @@ $jobTitle = $_POST['jobNaam'];
 //var met locatie
 $jobLocatie = $_POST['locatie'];
 
+//var met functie
+$jobFunction = $_POST['functie'];
+
 //var met omschrijving
 $jobBeschrijving = $_POST["jobOmschrijving"];
 
@@ -27,12 +30,15 @@ $jobTitle = $mysqli->real_escape_string($jobTitle);
 //zelfde als hierboven maar dan voor locatie
 $jobTitle = $mysqli->real_escape_string($jobLocatie);
 
+//zelfde als hierboven maar dan met de functie
+$jobFunction = $mysqli->real_escape_string($jobFunction);
+
 //zelfde als hierboven maar dan met omschrijving
 $jobTitle = $mysqli->real_escape_string($jobBeschrijving);
 
 //query voor het posten van een job
 $result = $mysqli->query('INSERT INTO vacature VALUES("'. $jobTitle .'", "'.$postDatum .'", "' .  $jobBeschrijving  .
-    '", "'.$jobTitle. '", "'.$jobLocatie. '", "'.$_SESSION["ID"].'")');
+    '", "'.$jobFunction. '", "'.$jobLocatie. '", "'.$_SESSION["ID"].'")');
 
 //als query succesvol uitgevoerd wordt
 if($result)
