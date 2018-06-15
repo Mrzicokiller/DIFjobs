@@ -403,6 +403,7 @@ include('../template/admin_vacature_wijzigen.php');
                 $('#description').val(result.Beschrijving);
                 $('#date').val(result.Datum);
                 $('#title').val(result.Titel);
+                $('#GebruikerID').val(result.gebruikerID);
 
                 $('#adminVacatureWijzigen').modal();
             });
