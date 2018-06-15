@@ -17,7 +17,10 @@ if($_GET['type'] == 'name')
 
     $name = $mysqli->real_escape_string($_POST['name']);
 
-    $nameUpdate = $mysqli->query("UPDATE `gebruiker` SET `Naam`= '".$name."'WHERE ID = " . $_SESSION['ID']);
+    if($mysqli->query("UPDATE `gebruiker` SET `Naam`= '".$name."'WHERE ID = " . $_SESSION['ID']))
+    {
+        echo 1;
+    }
 
     $_SESSION['name'] = $name;
 
@@ -29,7 +32,10 @@ elseif ($_GET['type'] == 'email')
 
     $email = $mysqli->real_escape_string($_POST['email']);
 
-    $emailUpdate = $mysqli->query("UPDATE `gebruiker` SET `Email`= '".$email."'WHERE ID = " . $_SESSION['ID']);
+    if($mysqli->query("UPDATE `gebruiker` SET `Email`= '".$email."'WHERE ID = " . $_SESSION['ID']))
+    {
+        echo 1;
+    }
 
     $_SESSION['email'] = $email;
 
@@ -62,7 +68,10 @@ elseif ($_GET['type'] == 'password')
 elseif ($_GET['type'] == 'skill')
 {
 
-    $skill = $mysqli->real_escape_string($_POST['skill']);
+    if($mysqli->real_escape_string($_POST['skill']))
+    {
+        echo 1;
+    }
 
     $skillUpdate = $mysqli->query("UPDATE `Student` SET `Specialisatie`= '".$skill."'WHERE ID = " . $_SESSION['ID']);
 
@@ -75,9 +84,12 @@ elseif ($_GET['type'] == 'bedrijf')
     $bedrijfTel = $mysqli->real_escape_string($_POST['tel']);
 
 
-    $bedrijfUpdate = $mysqli->query("UPDATE `bedrijf` SET `naamBedrijf`= '".$bedrijfNaam."',
+    if($mysqli->query("UPDATE `bedrijf` SET `naamBedrijf`= '".$bedrijfNaam."',
                                         `websiteUrl`= '".$bedrijfUrl."',
-                                        `tel_nummer`= '".$bedrijfTel."' WHERE ID = ".$_SESSION['ID']);
+                                        `tel_nummer`= '".$bedrijfTel."' WHERE ID = ".$_SESSION['ID']))
+    {
+        echo 1;
+    }
 
     $mysqli->close();
 }
@@ -87,7 +99,10 @@ elseif ($_GET['type'] == 'particulier')
     $particulierTel = $mysqli->real_escape_string($_POST['tel']);
 
 
-    $particulierUpdate = $mysqli->query("UPDATE `particulier` SET `tel_nummer`= '".$particulierTel."' WHERE ID = ".$_SESSION['ID']);
+    if($mysqli->query("UPDATE `particulier` SET `tel_nummer`= '".$particulierTel."' WHERE ID = ".$_SESSION['ID']))
+    {
+        echo 1;
+    }
 
     $mysqli->close();
 }
