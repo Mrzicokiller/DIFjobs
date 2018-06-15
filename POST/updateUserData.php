@@ -21,18 +21,7 @@ if($_GET['type'] == 'name')
 
     $_SESSION['name'] = $name;
 
-    if($nameUpdate->num_rows == 1)
-    {
-        $mysqli->close();
-
-        return true;
-    }
-    else
-    {
-        $mysqli->close();
-
-        return false;
-    }
+    $mysqli->close();
 
 }
 elseif ($_GET['type'] == 'email')
@@ -44,15 +33,6 @@ elseif ($_GET['type'] == 'email')
 
     $_SESSION['email'] = $email;
 
-    if($emailUpdate->num_rows > 0)
-    {
-        echo 0;
-    }
-    else
-    {
-        echo 1;
-    }
-
     $mysqli->close();
 }
 elseif ($_GET['type'] == 'password')
@@ -61,18 +41,8 @@ elseif ($_GET['type'] == 'password')
     $pass = $mysqli->real_escape_string($_POST['pass']);
 
     $pass = password_hash($pass, PASSWORD_BCRYPT);
-    $bedrijfUrl = $mysqli->real_escape_string($_POST['url']);
 
     $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $_SESSION['ID']);
-
-    if($passUpdate->num_rows > 0)
-    {
-        echo 0;
-    }
-    else
-    {
-        echo 1;
-    }
 
     $mysqli->close();
 }
@@ -80,7 +50,7 @@ elseif ($_GET['type'] == 'password')
 elseif ($_GET['type'] == 'skill')
 {
 
-    $skill = $mysqli->real_escape_string($mysqli, $_POST['skill']);
+    $skill = $mysqli->real_escape_string($_POST['skill']);
 
     $skillUpdate = $mysqli->query("UPDATE `Student` SET `Specialisatie`= '".$skill."'WHERE ID = " . $_SESSION['ID']);
 

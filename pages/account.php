@@ -137,7 +137,10 @@ if (isset($_SESSION['ID'])) {
                             <div class="col-lg-2 mt-2 pt-sm-4">
                                 <button onclick="nameSubmit();" class="btn btn-primary">Opslaan</button>
                             </div>
+
                         </div>
+                        <small class="redLetters" id="nameError">Naam is verplicht.</small>
+
                         <!-- einde naam veranderen-->
 
                         <!-- email veranderen -->
@@ -365,14 +368,23 @@ if (isset($_SESSION['ID'])) {
         $(document).ready(function () {
             $("#passwordError").hide();
             $("#emailError").hide();
+            $("#nameError").hide();
         });
 
         //als de nameSumbit knop van naam veranderen wordt geklikt
         function nameSubmit() {
+
             //update naar database met ajax
-            $.post("../POST/updateUserData.php?type=name", {
-                name: $("#naam").val()
-            });
+
+            if($("#naam").val().length > 0)
+            {
+                $.post("../POST/updateUserData.php?type=name", {
+                    name: $("#naam").val()
+                });
+            }else{
+                $("#nameError").show();
+            }
+
         }
 
         //als de emailSumbit knop van email veranderen wordt geklikt
@@ -383,11 +395,7 @@ if (isset($_SESSION['ID'])) {
                     email: $("#email").val()
                 },
                 function (result) {
-                    if (result == 1) {
-                        //laat emailError verschijnen
-                        $("#emailError").show();
-                    }
-                    else {
+                    if (result == 0) {
                         $("#emailError").hide();
 
                         //update het email adres
@@ -395,16 +403,22 @@ if (isset($_SESSION['ID'])) {
                             email: $("#email").val()
                         });
                     }
+                    else {
+                        //laat emailError verschijnen
+                        $("#emailError").show();
+                    }
                 });
         }
 
         //als de passwordSumbit knop van wachtwoord veranderen wordt geklikt
         function passwordSubmit() {
             //wachtwoorden vergelijken
-            if ($("#password").val() !== $("#confirmPassword").val()) {
+            if ($("#password").val() !== $("#confirmPassword").val() || $("#password").val().length <= 0 && $("#confirmPassword").val().length <= 0) {
                 $("#passwordError").show();
             }
             else {
+                $("#passwordError").hide();
+
                 //update wachtwoord met ajax
                 $.post("../POST/updateUserData.php?type=password", {
                     pass: $("#password").val()
