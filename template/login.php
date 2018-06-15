@@ -67,7 +67,6 @@
                         if (result == 1) {
                             $("#loginEmailError").hide();
                             checkEmailDone = true;
-                            alert(checkEmailDone + "," + checkPasswordDone);
 
                             if (checkEmailDone === true && checkPasswordDone === true) {
                                 $("#loginform").submit();
