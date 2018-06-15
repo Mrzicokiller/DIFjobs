@@ -51,7 +51,10 @@ elseif ($_GET['type'] == 'password')
 
     $pass = password_hash($pass, PASSWORD_BCRYPT);
 
-    $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $ID);
+    if($mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $ID))
+    {
+        echo 1;
+    }
 
     $mysqli->close();
 }
