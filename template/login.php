@@ -10,7 +10,7 @@
                         <label for="usrname"><span class="glyphicon glyphicon-user"></span> Email</label>
                         <input type="email" class="form-control" id="loginEmail" name="loginEmail"
                                placeholder="voer email in" required>
-                        <small id="loginEmailError" class="redLetters">Dit emailadres is niet bekend.</small>
+                        <small id="loginEmailError" class="redLetters">Dit emailadres is niet bekend of je account niet geverifieerd.</small>
                     </div>
 
                     <div class="form-group">
