@@ -328,7 +328,7 @@ if (isset($_SESSION['ID'])) {
                                 <tr>
                                     <th scope="col">Titel</th>
                                     <th scope="col">Functie</th>
-                                    <th scope="col">Naam</th>
+                                    <th scope="col">Bedrijf</th>
                                     <th scope="col">Datum</th>
                                 </tr>
                                 </thead>
@@ -336,8 +336,8 @@ if (isset($_SESSION['ID'])) {
 
                                 <?php
                                 //maak query om reacties op te halen
-                                $reactieQuery = $mysqli->query("SELECT v.Titel, v.Functie, g.Naam, r.datum FROM reactie r
-                                                                JOIN gebruiker g ON r.VgebruikerID = g.ID
+                                $reactieQuery = $mysqli->query("SELECT v.Titel, b.naamBedrijf, v.Functie, r.datum FROM reactie r
+                                                                JOIN bedrijf b ON r.VgebruikerID = b.ID
                                                                 JOIN vacature v ON (r.Vtitel = v.Titel AND r.Vdatum = v.Datum AND r.VgebruikerID = v.gebruikerID)
                                                                 WHERE r.SgebruikerID = " . $_SESSION['ID']);
                                 //while loop om reacties op het scherm te zetten
@@ -346,7 +346,7 @@ if (isset($_SESSION['ID'])) {
                                     <tr>
                                         <td><?php echo $rij['Titel'] ?></td>
                                         <td><?php echo $rij['Functie'] ?></td>
-                                        <td><?php echo $rij['Naam'] ?></td>
+                                        <td><?php echo $rij['naamBedrijf'] ?></td>
                                         <td><?php echo $rij['datum'] ?></td>
                                     </tr>
                                 <?php }
