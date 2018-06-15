@@ -362,6 +362,11 @@ if (isset($_SESSION['ID'])) {
             {
                 $.post("../POST/updateUserData.php?type=name", {
                     name: $("#naam").val()
+                }, function (result) {
+                    if(result == 1)
+                    {
+                        alert("Naam succesvol veranderd.");
+                    }
                 });
             }else{
                 $("#nameError").show();
@@ -383,6 +388,12 @@ if (isset($_SESSION['ID'])) {
                         //update het email adres
                         $.post("../POST/updateUserData.php?type=email", {
                             email: $("#email").val()
+                        }, function (result) {
+                            if(result == 1)
+                            {
+                                alert("email succesvol veranderd.");
+                            }
+
                         });
                     }
                     else {
@@ -404,6 +415,11 @@ if (isset($_SESSION['ID'])) {
                 //update wachtwoord met ajax
                 $.post("../POST/updateUserData.php?type=password", {
                     pass: $("#password").val()
+                }, function (result) {
+                    if(result == 1)
+                    {
+                        alert("wachtwoord succesvol veranderd.");
+                    }
                 });
             }
 
@@ -414,6 +430,11 @@ if (isset($_SESSION['ID'])) {
             //update specialisatie naar database met ajax
             $.post("../POST/updateUserData.php?type=skill", {
                 skill: $("#specialisatie").val()
+            }, function (result) {
+                if(result == 1)
+                {
+                    alert("specialisatie succesvol aangepast.");
+                }
             });
         }
 
@@ -423,12 +444,22 @@ if (isset($_SESSION['ID'])) {
                 name: $("#Bedrijfsnaam").val(),
                 url: $("#webURL").val(),
                 tel: $("#phoneNumber").val()
+            }, function (result) {
+                if(result == 1)
+                {
+                    alert("gegevens succesvol aangepast.");
+                }
             });
         }
 
         function particulierSubmit() {
             $.post("../POST/updateUserData.php?type=particulier", {
                 tel: $("#particulierPhone").val()
+            }, function (result) {
+                if(result == 1)
+                {
+                    alert("gegevens succesvol aangepast");
+                }
             });
         }
 
