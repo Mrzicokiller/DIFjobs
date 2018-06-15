@@ -28,6 +28,7 @@ if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 1) {
 if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 2) {
     echo "Je hebt succesvol een vacature geplaatst!";
 }
+
 ?>
 
 <div class="container-fluid">
@@ -68,7 +69,11 @@ if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 2) {
 			</div>
 		</div>
 	</div>
-
+    <?php
+        if (isset($_GET['loginError']) && $_GET['loginError'] == true) {
+            echo "<div class='alert alert-danger col-lg-10 ml-4 mr-auto mt-2'>Er is iets mis gegaan tijdens het in loggen, probeer het opnieuw of neem contact op met de beheerder.</div>";
+        }
+    ?>
 	<div class="row ml-sm-2 mr-sm-2 mt-lg-5">
 		<div class="col-lg-12">
 			<h2>Welkom op Dif Jobs!</h2>
