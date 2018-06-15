@@ -16,7 +16,16 @@ $naam = $_POST['naam'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $confPassword = $_POST['confirmPassword'];
-$avgCheck = $_POST['avgCheck'];
+
+if(isset($_POST['avgCheck']))
+{
+    $avgCheck = $_POST['avgCheck'];
+}
+else
+{
+    $avgCheck = "off";
+}
+
 
 //zorg ervoor dat er geen sql injections of html code in de string staat
 $naam = $mysqli->real_escape_string($naam);

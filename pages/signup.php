@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" class="form-control" id="email" placeholder="Voorbeeld@info.nl" required>
-                    <small id="emailexisterror" class="redLetters">Dit email adres is al geregistreerd. Vul een ander email adres in of vraag je wachtwoord aan.</small>
+                    <small id="emailexisterror" class="redLetters">Dit email adres is al geregistreerd of ongeldig. Vul een ander email adres in of vraag je wachtwoord aan als je het vergeten bent.</small>
                 </div>
 
                 <div class="form-group">
@@ -100,7 +100,7 @@
 
 
             //wachtwoorden vergelijken
-            if ($("#signUpPassword").val() !== $("#signUpconfirmPassword").val())
+            if ($("#signUpPassword").val() !== $("#signUpconfirmPassword").val() || $("#signUpPassword").val().length <= 0 || $("#signUpconfirmPassword").val().length <= 0)
             {
                 $("#passwordError").show();
                 checkPasswordDone = false;
