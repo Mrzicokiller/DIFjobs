@@ -36,42 +36,10 @@ session_start();
 
 <div class="container-fluid">
 
-	<div class="row mt-lg-4 ml-sm-2 mr-sm-2">
-		<div class="col-lg-12">
-			<h2>Filter</h2>
-			<div class="row">
-				<div class="col-lg-2 mb-3">
-
-					<label for="Labels">Selecteer een Label</label>
-					<select class="form-control" id="Labels">
-						<option>PHP ontwikkelaar</option>
-						<option>CSS meester</option>
-						<option>JS jester</option>
-						<option>stage</option>
-						<option>waarom zo veel</option>
-					</select>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
     <?php
     $haalJobs = $mysqli->query("SELECT * FROM vacature");
-/*
-if($haalJobs){
-    while ($rij = $haalJobs->fetch_array()) {  ?>
-
-		<div class="card mt-2 mr-2 mb-2 ml-2" style="width:30vw; float:left;">
-			<div class="card-body">
-				<h5 class="card-title"><?php echo $rij['Titel']; ?></h5>
-				<p class="card-text"><?php echo $rij['Beschrijving']; ?></p>
-				<a href="#" class="btn btn-primary clickbutton" data-toggle="modal" data-target="#respondPopup"  ID="respondBtn" name="respondBtn" value="<?php echo $rij['Titel']; ?>">Reageer</a>
-			</div>
-		</div>
-
-    <?php }} ?>
-*/
 
     //counter voor de om de juiste hoeveelheid per rij te weergeven
     $counter = 0;
