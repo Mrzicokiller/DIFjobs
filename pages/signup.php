@@ -53,7 +53,7 @@
 
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="avgCheck" id="avgCheck" required>
-                    <label class="form-check-label" for="avgCheck">Accepteerd u dat wij uw gegevens mogen opslaan.(Deze zullen wij niet delen met een derde.)</label>
+                    <label class="form-check-label" for="avgCheck">Accepteert u dat wij uw gegevens mogen opslaan.(Deze zullen wij niet delen met een derde.)</label>
 
                 </div>
                 <button onclick="submitForm()" type="button" class="btn btn-primary">Registreren</button>
