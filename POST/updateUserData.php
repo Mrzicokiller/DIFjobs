@@ -40,9 +40,18 @@ elseif ($_GET['type'] == 'password')
 
     $pass = $mysqli->real_escape_string($_POST['pass']);
 
+    if(isset($_POST['ID']))
+    {
+        $ID = $_POST['ID'];
+    }
+    else
+    {
+        $ID = $_SESSION['ID'];
+    }
+
     $pass = password_hash($pass, PASSWORD_BCRYPT);
 
-    $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $_SESSION['ID']);
+    $passUpdate = $mysqli->query("UPDATE `gebruiker` SET `Wachtwoord`= '".$pass."'WHERE ID = " . $ID);
 
     $mysqli->close();
 }

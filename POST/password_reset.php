@@ -53,86 +53,98 @@ if(!isset($_GET['email']))
 }
 else
 {
-    ?>
 
-    <!DOCTYPE html>
-<html lang="nl">
-<head>
-    <?php
-    session_start();
-    include("../template/header.php")
-    ?>
-</head>
+    $email = $_GET['email'];
+    $code = $_GET['code'];
+    $gebruiker = $mysqli->query("SELECT ID FROM gebruiker WHERE Email = '$email' AND verifiedCode = '$code'");
+    $gebruikerID = $gebruiker->fetch_object()->ID;
+    if($gebruiker->num_rows > 0) {
+        ?>
 
-<body>
-<nav class="navbar navbar-expand-lg bg-dark">
-    <?php
-    include('../template/nav.php')
-    ?>
-</nav>
+        <!DOCTYPE html>
+        <html lang="nl">
+        <head>
+            <?php
+            session_start();
+            include("../template/header.php")
+            ?>
+        </head>
 
-<div class="container-fluid">
-    <div class="row mt-sm-4 ml-sm-2 mr-sm-2">
-        <div class="col-lg-12">
-            <h1>Wachtwoord Resetten</h1>
-            <hr/>
-        </div>
-    </div>
+        <body>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <?php
+            include('../template/nav.php')
+            ?>
+        </nav>
 
-    <div class="row ml-sm-2 mr-sm-2">
-        <div class="col-lg-12">
-            <h3 id="errorReset" class="redLetters" hidden="true">Er is iets fout gegaan. Neem contact op met de beheerder.</h3>
-            <h3 id="succesReset" class="greenLetters" hidden="true">Het is gelukt om je wachtwoord te veranderen.</h3>
-            <form name="newPasswordForm">
-                <div class="form-group">
-                    <label for="passwordReset">Vul hier je nieuwe wachtwoord adres in.</label>
-                    <input id="passwordReset" type="password" class="form-control" placeholder="Wachtwoord" required>
+        <div class="container-fluid">
+            <div class="row mt-sm-4 ml-sm-2 mr-sm-2">
+                <div class="col-lg-12">
+                    <h1>Wachtwoord Resetten</h1>
+                    <hr/>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="passwordReset2">Herhaal Wachtwoord</label>
-                    <input type="password" class="form-control" id="passwordReset2" placeholder="Wachtwoord" required>
-                    <small id="passwordError" hidden="true" class="redLetters">Het wachtwoord is niet hetzelfde.</small>
+            <div class="row ml-sm-2 mr-sm-2">
+                <div class="col-lg-12">
+                    <h3 id="errorReset" class="redLetters" hidden="true">Er is iets fout gegaan. Neem contact op met de
+                        beheerder.</h3>
+                    <h3 id="succesReset" class="greenLetters" hidden="true">Het is gelukt om je wachtwoord te
+                        veranderen.</h3>
+                    <form name="newPasswordForm">
+                        <div class="form-group">
+                            <label for="passwordReset">Vul hier je nieuwe wachtwoord adres in.</label>
+                            <input id="passwordReset" type="password" class="form-control" placeholder="Wachtwoord"
+                                   required>
+                            <input id="ID" type="hidden" value="<?php echo $gebruikerID; ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passwordReset2">Herhaal Wachtwoord</label>
+                            <input type="password" class="form-control" id="passwordReset2" placeholder="Wachtwoord"
+                                   required>
+                            <small id="passwordError" hidden="true" class="redLetters">Het wachtwoord is niet
+                                hetzelfde.
+                            </small>
+                        </div>
+                        <button class="btn btn-primary" type="button" onclick="resetPassword();">Submit</button>
+                    </form>
+                    <h3 id="reactie"></h3>
                 </div>
-                <button class="btn btn-primary" type="button" onclick="resetPassword();">Submit</button>
-            </form>
-            <h3 id="reactie"></h3>
+            </div>
+
         </div>
-    </div>
+        <script>
 
-</div>
-<script>
+            function resetPassword() {
+                //wachtwoorden vergelijken
+                if ($("#passwordReset").val() !== $("#passwordReset2").val()) {
+                    $("#passwordError").show();
+                }
+                else {
+                    //maak een post naar de verwerkpagina
+                    $.post("../POST/updateUserData.php?type=password", {
+                            pass: $("#passwordReset").val(),
+                            ID: $("#ID").val()
+                        },
+                        function (result) {
+                            if (result == 1) {
+                                $('#succesReset').show();
+                            }
+                            else {
 
-    function resetPassword()
-    {
-        //wachtwoorden vergelijken
-        if ($("#passwordReset").val() !== $("#passwordReset2").val())
-        {
-            $("#passwordError").show();
-        }
-        else
-        {
-            //maak een post naar de verwerkpagina
-            $.post("../POST/updateUserData.php?type=password", {
-                    pass: $("#passwordReset").val()
-                },
-                function (result) {
-                    if (result == 1) {
-                        $('#succesReset').show();
-                    }
-                    else {
+                                $('#errorReset').show();
+                            }
 
-                        $('#errorReset').show();
-                    }
+                        });
+                }
+            }
+        </script>
+        </body>
+        </html>
 
-                });
-        }
+        <?php
     }
-</script>
-</body>
-</html>
-
-<?php
 }
 ?>
 
