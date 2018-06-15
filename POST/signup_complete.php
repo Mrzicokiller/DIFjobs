@@ -21,7 +21,7 @@ if(isset($_POST['studentSubmit']))
     if($mysqli->query('INSERT INTO student VALUES(' . $gebruikersID . ', "' . $specialisatie .'")'))
     {
         //zet de status in de variable
-        $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
+        $status = "Je bent geregistreerd als student. Wil je later ook een bedrijf of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina(Nog niet beschikbaar)";
     }
     else
     {
@@ -39,7 +39,7 @@ elseif(isset($_POST['bedrijfSubmit']))
 
     if($mysqli->query('INSERT INTO bedrijf VALUES(' . $gebruikersID . ',"' . $bedrijfNaam . '", "' . $bedrijfURL . '", "' . $bedrijfTel . '")'))
     {
-        $status = "Je bent geregistreerd als bedrijf. Wil je later ook een student of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina";
+        $status = "Je bent geregistreerd als bedrijf. Wil je later ook een student of particulieren opdrachtgever aan je account toevoegen dan kan dat via de account pagina(Nog niet beschikbaar)";
     }
     else
     {
@@ -55,7 +55,7 @@ elseif(isset($_POST['particulierSubmit']))
 
     if($mysqli->query('INSERT INTO particulier VALUES(' . $gebruikersID . ', "' . $particulierTel .'")'))
     {
-        $status = "Je bent geregistreerd als particulier. Wil je later ook een bedrijf of student aan je account toevoegen dan kan dat via de account pagina";
+        $status = "Je bent geregistreerd als particulier. Wil je later ook een bedrijf of student aan je account toevoegen dan kan dat via de account pagina(Nog niet beschikbaar)";
     }
     else
     {
