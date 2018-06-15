@@ -61,8 +61,7 @@ if ($checkEmailExist) {
 
         header("location: ../pages/home.php");
     } else {
-        echo "$checkPassword</br>";
-        echo "$loginwachtwoord</br>";
+        header("location: ../pages/home.php?loginError=true");
     }
 
 
