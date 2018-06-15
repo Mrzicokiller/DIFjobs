@@ -10,21 +10,6 @@ session_start();
 if (isset($_SESSION['ID'])) {
     include_once('../config.php');
 
-    //haal ID op uit session
-    $ID = $_SESSION['ID'];
-
-    //query's om te checken wat voor soort gebruiker de account pagina wil bereiken
-    $bedrijfQuery = $mysqli->query("SELECT count(b.ID) AS 'count' FROM gebruiker g
-                              JOIN bedrijf b ON g.ID = b.ID
-                              WHERE b.ID = " . $ID);
-
-    $particulierQuery = $mysqli->query("SELECT count(p.ID) AS 'count' FROM gebruiker g
-                              JOIN particulier p ON g.ID = p.ID
-                              WHERE p.ID = " . $ID);
-
-    $studentQuery = $mysqli->query("SELECT count(s.ID) AS 'count' FROM gebruiker g
-                              JOIN student s ON g.ID = s.ID
-                              WHERE s.ID = " . $ID);
 
 
     //maak booleans en check of het een bedrijf is
@@ -32,10 +17,11 @@ if (isset($_SESSION['ID'])) {
     $is_particulier = false;
     $is_student = false;
 
-    if ($bedrijfQuery->fetch_object()->count > 0) {
+    //haal benodigde gegevens op
+    if ($_SESSION["accountType"] == 'bedrijf') {
         $is_bedrijf = true;
 
-        $bedrijfGegevensQuery = $mysqli->query("SELECT * FROM bedrijf WHERE ID = " . $ID);
+        $bedrijfGegevensQuery = $mysqli->query("SELECT * FROM bedrijf WHERE ID = " . $_SESSION["ID"]);
 
         $bedrijfsgegevens = $bedrijfGegevensQuery->fetch_array();
 
@@ -46,25 +32,21 @@ if (isset($_SESSION['ID'])) {
     }
 
     //check of het een particulier is
-    if ($particulierQuery->fetch_object()->count > 0) {
+    if ($_SESSION["accountType"] == 'particulier') {
         $is_particulier = true;
 
-        $particulierGegevensQuery = $mysqli->query("SELECT * FROM particulier WHERE ID = " . $ID);
+        $particulierGegevensQuery = $mysqli->query("SELECT * FROM particulier WHERE ID = " . $_SESSION["ID"]);
 
         $particulierTel = $particulierGegevensQuery->fetch_object()->tel_nummer;
-
-
     }
 
     //check of het een student is
-    if ($studentQuery->fetch_object()->count > 0) {
+    if ($_SESSION["accountType"] == 'student') {
         $is_student = true;
 
-        $studentGegevensQuery = $mysqli->query("SELECT * FROM student WHERE ID = " . $ID);
-
+        $studentGegevensQuery = $mysqli->query("SELECT * FROM student WHERE ID = " . $_SESSION["ID"]);
 
         $specialisatie = $studentGegevensQuery->fetch_object()->Specialisatie;
-
     }
 
 
