@@ -42,7 +42,7 @@ if (isset($_SESSION['ID'])) {
 <div class="container-fluid">
     <div class="row mt-lg-2">
         <div class="col-lg-12">
-            <h1>Vacatures:</h1>
+            <h1>Reacties:</h1>
             <hr/>
         </div>
     </div>
