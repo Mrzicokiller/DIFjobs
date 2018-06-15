@@ -67,7 +67,7 @@ if (isset($_SESSION['ID'])) {
         $counter++;
         ?>
         <div class="col-lg-4">
-            <div class="card card-green">
+            <div class="card card-green mt-1 mb-1">
                 <div class="card-heading">
                     <div class="row px-sm-3 py-sm-3">
                         <div class="col-lg-12">
