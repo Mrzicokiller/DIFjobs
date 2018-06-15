@@ -88,7 +88,7 @@
                 },
                 function (result)
                 {
-                    if (result == 1) {
+                    if (result == 1 || result == 2) {
                         $("#emailexisterror").show();
                         checkEmailDone = false;
                     }
