@@ -5,7 +5,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
-                <form role="loginform" method="POST" action="../POST/login.php">
+                <form role="loginform" id="loginform" method="POST" action="../POST/login.php">
                     <div class="form-group">
                         <label for="usrname"><span class="glyphicon glyphicon-user"></span> Email</label>
                         <input type="email" class="form-control" id="loginEmail" name="loginEmail"
