@@ -24,6 +24,10 @@
 if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 1) {
     echo "Je hebt succesvol op de vacature gereageerd!";
 }
+
+if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 2) {
+    echo "Je hebt succesvol een vacature geplaatst!";
+}
 ?>
 
 <div class="container-fluid">

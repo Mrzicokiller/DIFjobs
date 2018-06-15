@@ -8,14 +8,14 @@
 
 				<form method="POST" action="../POST/respond.php">
 
-					<input class="respondModalInput" name="jobTitle" type="text" value="" readonly>
+					<input class="respondModalInput" name="jobTitle" type="text" value="" readonly hidden>
 
 					<div class="form-group">
 						<label for="Bericht">Bericht</label>
 						<textarea class="form-control" id="Bericht" rows="3" maxlength="750" name="Bericht"></textarea>
 					</div>
 
-					<button type="submit" class="btn btn-default btn-block buttoncolorgray"><span
+					<button type="submit" class="btn btn-success btn-block"><span
 								class="glyphicon glyphicon-off"></span> Verzend
 					</button>
 				</form>
