@@ -50,7 +50,7 @@
 
 				<div class="form-group">
 					<label for="Omschrijving">Omschrijving</label>
-					<textarea class="form-control" id="jobOmschrijving" rows="3" maxlength="750" name="jobOmschrijving"></textarea>
+					<textarea class="form-control" id="Omschrijving" rows="3" maxlength="750" name="jobOmschrijving" required></textarea>
 				</div>
 
 				<button type="submit" class="btn btn-default btn-block buttoncolorgray"><span

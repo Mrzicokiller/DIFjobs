@@ -37,7 +37,6 @@ session_start();
 <div class="container-fluid">
 
 
-
     <?php
     $haalJobs = $mysqli->query("SELECT * FROM vacature");
 
