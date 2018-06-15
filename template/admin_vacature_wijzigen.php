@@ -29,6 +29,7 @@
 
                     <input type="hidden" id="date" value="" name="date">
                     <input type="hidden" id="title" value="" name="title">
+                    <input type="hidden" id="GebruikerID" value="" name="GebruikerID">
 
 
                     <div class="col-sm-3 mt-2 pt-sm-4">

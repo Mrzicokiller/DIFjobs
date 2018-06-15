@@ -19,16 +19,32 @@ if (isset($_SESSION['ID'])) {
     $date = date_format(new DateTime($date), "Y-m-d h:i:s");
     $title = $mysqli->real_escape_string($_POST['title']);
 
+    if(isset($_POST['GebruikerID']))
+    {
+        $ID = $_POST['GebruikerID'];
+    }
+    else
+    {
+        $ID = $_SESSION['ID'];
+    }
+
     //maak en doe query
     $vacatureQuery = $mysqli->query("UPDATE `vacature` SET `Beschrijving`= '" . $description . "',`Functie`= '" . $job . "',`Locatie`= '" . $location . "'
-                            WHERE Titel = '" . $title . "' AND Datum = '" . $date . "' AND gebruikerID = " . $_SESSION['ID']);
+                            WHERE Titel = '" . $title . "' AND Datum = '" . $date . "' AND gebruikerID = " . $ID);
 
     //sluit connectie
 
 
     if ($vacatureQuery == 1) {
-        //stuur terug naar account pagina
-        header('Location: ../pages/account.php');
+        if($_SESSION['admin'] == 1)
+        {
+            header('Location: ../pages/admin_home.php');
+        }
+        else{
+            //stuur terug naar account pagina
+            header('Location: ../pages/account.php');
+        }
+
     } else {
         echo "oops! something went wrong.";
     }
