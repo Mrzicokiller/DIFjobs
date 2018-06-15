@@ -52,11 +52,11 @@
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="avgCheck" id="avgCheck" required>
+                    <input type="checkbox" class="form-check-input" name="avgCheck" id="avgCheck">
                     <label class="form-check-label" for="avgCheck">Ik ga ermee akkoord dat bovenstaande gegevens worden opgeslagen(bovenstaande gegevens worden niet gedeeld met derden)</label>
 
                 </div>
-                <button onclick="submitForm()" type="button" class="btn btn-primary">Registreren</button>
+                <button onclick="submitSignUpForm()" type="button" class="btn btn-primary">Registreren</button>
             </form>
         </div>
     </div>
@@ -73,7 +73,7 @@
     });
 
     //input velden checken
-    function submitForm()
+    function submitSignUpForm()
     {
 
         $("#passwordError").hide();
