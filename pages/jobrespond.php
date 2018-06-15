@@ -21,7 +21,7 @@ if (isset($_SESSION['ID'])) {
     $userID = $_SESSION['ID'];
 
     //maak query om gegevens uit reactie te halen
-    $reactieQuery = $mysqli->query("SELECT g.Naam, r.bericht, r.datum FROM reactie r
+    $reactieQuery = $mysqli->query("SELECT g.Naam, g.Email, r.bericht, r.datum FROM reactie r
                                         JOIN gebruiker g ON r.SgebruikerID = g.ID
                                         WHERE Vtitel = '" . $title . "' AND Vdatum = '" . $Vdate . "' AND VgebruikerID = " . $userID);
 
@@ -72,6 +72,7 @@ if (isset($_SESSION['ID'])) {
                     <div class="row px-sm-3 py-sm-3">
                         <div class="col-lg-12">
                             Vacature: <?php echo $title; ?>
+                            <small class="pull-right"><?php echo $Sdate; ?></small>
                         </div>
                     </div>
                 </div>
@@ -79,8 +80,7 @@ if (isset($_SESSION['ID'])) {
                 <div class="card-footer">
                     <?php echo $rij['bericht']; ?>
                     <hr/>
-                    <small class="pull-left">Student: <?php echo $rij["Naam"]; ?></small>
-                    <small class="pull-right"><?php echo $Sdate; ?></small>
+                    <small class="pull-left">Student info: <?php echo $rij["Naam"]; ?>, <?php echo $rij["Email"]; ?></small>
                 </div>
 
             </div>
