@@ -395,7 +395,7 @@ if (isset($_SESSION['ID'])) {
         //als de passwordSumbit knop van wachtwoord veranderen wordt geklikt
         function passwordSubmit() {
             //wachtwoorden vergelijken
-            if ($("#password").val() !== $("#confirmPassword").val() || $("#password").val().length <= 0 && $("#confirmPassword").val().length <= 0) {
+            if ($("#password").val() !== $("#confirmPassword").val() || $("#password").val().length <= 0 || $("#confirmPassword").val().length <= 0) {
                 $("#passwordError").show();
             }
             else {

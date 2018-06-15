@@ -42,7 +42,7 @@ if(!isset($_GET['email']))
     {
         if($mysqli->query("UPDATE gebruiker SET verifiedCode = '$verifiedCode' WHERE email = '$email'"))
         {
-            echo 'Er is een email gestuurd met een link <a href="../POST/password_reset.php?email=' . $email . '&code=' . $verifiedCode . '">Email verifiëren</a> ';
+            echo 'Er is een email gestuurd met een link <a href="../POST/password_reset.php?email=' . $email . '&code=' . $verifiedCode . '">Wachtwoord aanpassen</a> ';
 
         }
         else
@@ -87,9 +87,9 @@ else
 
             <div class="row ml-sm-2 mr-sm-2">
                 <div class="col-lg-12">
-                    <h3 id="errorReset" class="redLetters" hidden>Er is iets fout gegaan. Neem contact op met de
+                    <h3 id="errorReset" class="redLetters">Er is iets fout gegaan. Neem contact op met de
                         beheerder.</h3>
-                    <h3 id="succesReset" class="greenLetters" hidden>Het is gelukt om je wachtwoord te
+                    <h3 id="succesReset" class="greenLetters">Het is gelukt om je wachtwoord te
                         veranderen.</h3>
                     <form name="newPasswordForm">
                         <div class="form-group">
@@ -103,7 +103,7 @@ else
                             <label for="passwordReset2">Herhaal Wachtwoord</label>
                             <input type="password" class="form-control" id="passwordReset2" placeholder="Wachtwoord"
                                    required>
-                            <small id="passwordError" hidden class="redLetters">Het wachtwoord is niet
+                            <small id="passwordError" class="redLetters">Het wachtwoord is niet
                                 hetzelfde.
                             </small>
                         </div>
@@ -115,10 +115,16 @@ else
 
         </div>
         <script>
+            //alles uitvoeren als het document geladen is
+            $(document).ready(function(){
+                $("#errorReset").hide();
+                $("#succesReset").hide();
+                $("#passwordError").hide();
+            });
 
             function resetPassword() {
                 //wachtwoorden vergelijken
-                if ($("#passwordReset").val() !== $("#passwordReset2").val()) {
+                if ($("#passwordReset").val() !== $("#passwordReset2").val() || $("#passwordReset").val().length <= 0 || $("#passwordReset2").val().length <= 0) {
                     $("#passwordError").show();
                 }
                 else {
@@ -129,7 +135,6 @@ else
                         },
                         function (result) {
                             if (result == 1) {
-                                alert('OK');
                                 $('#succesReset').show();
                             }
                             else {
