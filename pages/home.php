@@ -80,7 +80,7 @@ if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 2) {
             </div>
         </div>
     </div>
-</div>
+
 
 <div class="row ml-sm-2 mr-sm-2 mt-lg-4">
     <div class="col-lg-12">
@@ -99,7 +99,6 @@ if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 2) {
     </div>
 </div>
 </div>
-
 
 </body>
 </html>

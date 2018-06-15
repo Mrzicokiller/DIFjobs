@@ -289,7 +289,7 @@ if (isset($_SESSION['ID'])) {
                                             <a href="editjob.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
                                                         class="fa fa-edit"></span></a></td>
                                         <td>
-                                            <a href="jobrespondses.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
+                                            <a href="jobresponses.php?titel=<?php echo $rij['Titel']; ?>&datum=<?php echo $dateURL; ?>"><span
                                                         class="fa fa-comment"></span></a></td>
                                     </tr>
 
