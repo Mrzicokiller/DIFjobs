@@ -42,9 +42,9 @@ if (isset($_GET['postsuccess']) && $_GET['postsuccess'] == 2) {
     <div class="row ml-sm-2 mr-sm-2">
         <div class="col-lg-12 mt-3">
             <?php
-            if (isset($_GET['login']) && $_GET['login'] == true) {
+            if (isset($_GET['loginSucces'])) {
                 echo "<div class='alert alert-success'>Je bent succesvol ingelogd.</div>";
-            } elseif (isset($_GET['login']) && $_GET['login'] == false) {
+            } elseif (isset($_GET['loginError'])) {
                 echo "<div class='alert alert-danger'>Er is iets mis gegaan tijdens het in loggen, probeer het opnieuw of neem contact op met de beheerder.</div>";
             }
             ?>

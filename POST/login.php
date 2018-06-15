@@ -59,9 +59,9 @@ if ($checkEmailExist) {
         $_SESSION["admin"] = $admin;
         $_SESSION['accountType'] = $type;
 
-        header("location: ../pages/home.php?login=true");
+        header("location: ../pages/home.php?loginSucces");
     } else {
-        header("location: ../pages/home.php?login=false");
+        header("location: ../pages/home.php?loginError");
     }
 
 
