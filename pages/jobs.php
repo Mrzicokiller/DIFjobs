@@ -100,6 +100,7 @@ if($haalJobs){
 					<hr/>
 
 					<small class="pull-right">Geplaatst op: <?php echo $rij['Datum']; ?></small>
+					<a href="#" class="btn btn-success clickbutton" data-toggle="modal" data-target="#respondPopup"  ID="respondBtn" name="respondBtn" value="<?php echo $rij['Titel']; ?>">Reageer</a>
 				</div>
 
 			</div>

@@ -37,14 +37,14 @@ $jobFunction = $mysqli->real_escape_string($jobFunction);
 $jobBeschrijving = $mysqli->real_escape_string($jobBeschrijving);
 
 //query voor het posten van een job
-$result = $mysqli->query('INSERT INTO vacature VALUES("'. $jobTitle .'", "'.$postDatum .'", "' .  $jobBeschrijving  .
-    '", "'.$jobFunction. '", "'.$jobLocatie. '", "'.$_SESSION["ID"].'")');
+$result = $mysqli->query('INSERT INTO vacature VALUES("' . $jobTitle . '", "' . $postDatum . '", "' . $jobBeschrijving .
+    '", "' . $jobFunction . '", "' . $jobLocatie . '", "' . $_SESSION["ID"] . '")');
 
 //als query succesvol uitgevoerd wordt
-if($result)
-{
-    echo "succesfully posted";
-} else{
+if ($result) {
+    header("Location: ../pages/home.php?postsuccess=2");
+    die();
+} else {
     //zo niet dan:
     echo "failed to post";
 }
