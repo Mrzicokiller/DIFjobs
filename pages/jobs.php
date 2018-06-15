@@ -40,7 +40,7 @@ session_start();
 		<div class="col-lg-12">
 			<h2>Filter</h2>
 			<div class="row">
-				<div class="col-lg-2">
+				<div class="col-lg-2 mb-3">
 
 					<label for="Labels">Selecteer een Label</label>
 					<select class="form-control" id="Labels">
@@ -51,11 +51,6 @@ session_start();
 						<option>waarom zo veel</option>
 					</select>
 				</div>
-
-				<div class="col-lg-2">
-					<label for="Search">Zoek een Label</label>
-					<input type="text" id="Search" class="form-control" placeholder="Zoeken..">
-				</div>
 			</div>
 		</div>
 	</div>
@@ -63,7 +58,7 @@ session_start();
 
     <?php
     $haalJobs = $mysqli->query("SELECT * FROM vacature");
-
+/*
 if($haalJobs){
     while ($rij = $haalJobs->fetch_array()) {  ?>
 
@@ -76,7 +71,44 @@ if($haalJobs){
 		</div>
 
     <?php }} ?>
+*/
 
+    //counter voor de om de juiste hoeveelheid per rij te weergeven
+    $counter = 0;
+
+    //while loop om alle reacties op het scherm te zetten
+    while ($rij = $haalJobs->fetch_array()) {
+
+        if ($counter == 0) {
+            ?>
+	<div class="row mt-lg-4 ml-sm-2 mr-sm-2">
+        <?php }
+        $counter++;
+        ?>
+		<div class="col-lg-4">
+			<div class="card card-green mt-1 mb-1">
+				<div class="card-heading">
+					<div class="row px-sm-3 py-sm-3">
+						<div class="col-lg-12">
+							Vacature: <?php echo $rij['Titel']; ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-footer">
+                    <?php echo $rij['Beschrijving']; ?>
+					<hr/>
+
+					<small class="pull-right">Geplaatst op: <?php echo $rij['Datum']; ?></small>
+				</div>
+
+			</div>
+		</div>
+        <?php if ($counter >= 3) { ?>
+	</div>
+    <?php $counter = 0;
+    }
+    } ?>
 </div>
 </body>
 </html>

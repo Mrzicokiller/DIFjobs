@@ -44,7 +44,8 @@ if ($getContactQuery) {
         $emailToo = $row[0];
             if($mysqli->query('INSERT INTO reactie VALUES("'. $_SESSION['ID'] .'", "'.$titelNaam .'", "' .  $Vdatum  . '", "'.$VgebruikerID. '", "'.$reactieDatum. '", "'.$reactieBericht.'")'))
         {
-            echo "succesfully responded";
+            header("Location: ../pages/home.php?postsuccess=1");
+            die();
             //mail($emailToo,"Er is gereageerd op je vacature!",$reactieBericht);
         } else{
             echo "failed to respond";
