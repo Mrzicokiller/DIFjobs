@@ -128,7 +128,7 @@ else
                             ID: $("#ID").val()
                         },
                         function (result) {
-                            if (result === 1) {
+                            if (result == 1) {
                                 alert('OK');
                                 $('#succesReset').show();
                             }
