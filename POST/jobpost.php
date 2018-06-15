@@ -28,13 +28,13 @@ $postDatum = date("Y-m-d h-i-s");
 $jobTitle = $mysqli->real_escape_string($jobTitle);
 
 //zelfde als hierboven maar dan voor locatie
-$jobTitle = $mysqli->real_escape_string($jobLocatie);
+$jobLocatie = $mysqli->real_escape_string($jobLocatie);
 
 //zelfde als hierboven maar dan met de functie
 $jobFunction = $mysqli->real_escape_string($jobFunction);
 
 //zelfde als hierboven maar dan met omschrijving
-$jobTitle = $mysqli->real_escape_string($jobBeschrijving);
+$jobBeschrijving = $mysqli->real_escape_string($jobBeschrijving);
 
 //query voor het posten van een job
 $result = $mysqli->query('INSERT INTO vacature VALUES("'. $jobTitle .'", "'.$postDatum .'", "' .  $jobBeschrijving  .
